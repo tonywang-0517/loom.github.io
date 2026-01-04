@@ -3,30 +3,30 @@
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-blue?logo=github)](https://github.com/tonywang-0517/Mirage)
 [![Project](https://img.shields.io/badge/Project-Page-green)](https://tonywang-0517.github.io/mirage.github.io/)
 
-Project page for **MIRAGE: Masked Imitation for Robotic Action Generation and Execution** by Puyue Wang (University of Auckland, COMPSCI 792 Project - 2025).
+Project page for **MIRAGE: Masked Imitation for Robotic Action Generation and Execution** by Puyue Wang (University of Auckland, ICML 2026).
 
-A lightweight execution framework for robust whole-body humanoid control with standardized data, enhancing robustness and decoupling execution from upstream planning.
+A lightweight execution framework for robust whole-body humanoid control with standardized data, achieving substantially higher success rates under domain shifts and enabling reliable zero-shot sim-to-sim transfer to unseen physics engines.
 
 ## Overview
 
-Vision–Language–Action (VLA) systems have advanced semantic reasoning for robots, yet achieving robust whole-body humanoid control that couples semantic understanding with dynamic adaptability remains a central challenge. MIRAGE introduces three key innovations:
+Achieving robust whole-body humanoid control under dynamics mismatch remains a central challenge in robotics. MIRAGE introduces two key innovations:
 
-- **SCHEMA** (Sparse Command Handling for Embodied Motion Abstraction): Unified sparse-joint protocol based on SMPL-X key body joints
-- **MIRROR** (Memory-Integrated Robust Representation for Online Robustness): Leverages action-state histories for robust control under domain shifts
-- **RISE** (Recovery via Inferred State Endpoints): Distills expert recoveries for long-horizon behaviors like fall-and-get-up
+- **SCHEMA** (Sparse Command Handling for Embodied Motion Abstraction): A standardized sparse-joint protocol based on SMPL-X keypoints that consolidates fragmented motion sources into a single training and execution format
+- **MIRROR** (Memory-Integrated Robust Representation for Online Robustness): A history-conditioned control policy that leverages recent state–action sequences as implicit dynamics memory, significantly improving stability and sim-to-sim transfer
 
 ## Key Results
 
-- **∼17%** trajectory error reduction
-- **∼16 percentage points** strict success improvement
-- **∼34 points** push-recovery improvement
-- **61%** fall-recovery success rate (vs. 0% baseline)
-- **75.9%** sim-to-sim transfer success (vs. 0.7% baseline)
+- **90.7%** success rate in training simulator (IsaacLab)
+- **86.0%** success rate in zero-shot transfer to unseen physics engine (Genesis)
+- Significantly outperforms strong baselines including MaskedMimic, OmniH2O, ExBody2, and Hover
+- Robust performance across six representative motions under zero-shot domain transfer
 
 ## Links
 
+- **Project Page**: [https://tonywang-0517.github.io/mirage.github.io/](https://tonywang-0517.github.io/mirage.github.io/)
 - **GitHub Repository**: [https://github.com/tonywang-0517/Mirage](https://github.com/tonywang-0517/Mirage)
-- **Project Mural**: [View on Mural](https://app.mural.co/t/puyuewangsworkspace5613/m/unicornai4709/1754387147784/6803cde2dd3d1ec8035077a659d47cdce2261ad6?sender=u18823d8b8a2cf6ec54a84733)
+- **Paper**: [Overleaf](https://www.overleaf.com/read/ttjqpnkhmyrv#3c1420)
+- **Video**: [YouTube](https://www.youtube.com/watch?v=YOUR_VIDEO_ID) (Coming soon)
 - **Author**: [Puyue Wang](https://github.com/tonywang-0517)
 
 ## Project Structure
@@ -36,44 +36,56 @@ mirage.github.io/
 ├── index.html              # Main project page
 ├── static/
 │   ├── css/               # Stylesheets
+│   │   └── index.css      # Main stylesheet with sand/gold theme variables
 │   ├── js/                # JavaScript files
 │   ├── images/            # Images and visualizations
-│   │   ├── poster_banner.jpg           # Hero section background
-│   │   ├── structure_overview.jpg      # Framework overview
+│   │   ├── bg.png                      # Hero section background
+│   │   ├── mirage_overview.png         # Framework overview
 │   │   ├── teacher_training_stage1.jpg # Training stage 1
 │   │   ├── student_training_stage2.jpg # Training stage 2
 │   │   ├── mirage_eval_process.jpg     # Evaluation process
-│   │   ├── method_comparison.png       # Method comparison
-│   │   ├── metrics_comparison.png      # Performance metrics
+│   │   ├── method_comparison.png       # Ablation training curves
+│   │   ├── metrics_comparison1.png     # Training metrics comparison
+│   │   ├── all_metrics_eval_combined.png # Ablation results on Genesis
 │   │   ├── terrain.png                 # Terrain diversity
 │   │   └── favicon.ico                 # Site favicon
-│   ├── videos/            # Demo videos
-│   │   ├── g1_genesis_walk_g1.mp4      # Genesis simulator demo
-│   │   └── g1_isaaclab_walk_demo.mp4   # IsaacLab simulator demo
-│   └── pdfs/              # Papers and posters
+│   └── videos/            # Demo videos
+│       ├── eval/           # Evaluation videos
+│       │   ├── 1_punch/mirage/tmp_video.mp4
+│       │   ├── 2_getup/mirage/tmp_video.mp4
+│       │   ├── 3_high_kick/mirage/tmp_video.mp4
+│       │   ├── 4_common_walk/mirage/tmp_video.mp4
+│       │   ├── 5_side_walk/mirage/tmp_video.mp4
+│       │   └── 6_martial/mirage/tmp_video.mp4
+│       ├── g1_random_push.mp4          # Random perturbation recovery
+│       ├── masked_mimic_g1_no_vae.mp4  # Teacher-student distillation
+│       └── ...
 └── README.md              # This file
 ```
 
 ## Features
 
-- **Hero Section**: Eye-catching introduction with gradient design
-- **Performance Metrics**: Interactive cards showcasing key results
-- **Demo Videos**: Carousel of G1 humanoid demonstrations in different simulators
-- **Training Pipeline**: Two-stage teacher-student training visualization
-- **Evaluation Framework**: Comprehensive testing across multiple dimensions
-- **Method Comparison**: Side-by-side comparison with baseline approaches
-- **Quantitative Results**: Detailed performance metrics visualization
+- **Hero Section**: Eye-catching introduction with custom background image
+- **Performance Highlights**: Interactive cards showcasing key success rates
+- **Two Core Innovations**: Detailed explanation of SCHEMA and MIRROR
+- **Training Methodology**: Two-stage teacher-student training architecture with domain randomization
+- **Sim-to-Sim Transfer Performance**: Comprehensive comparison table with baselines
+- **Ablation Studies**: Component analysis, training curves, and test results
+- **Representative Motion Demonstrations**: Six motion videos under zero-shot domain transfer
+- **Policy Structure Comparison**: Method comparison table
+- **Live Demonstrations**: Robust recovery and expert distillation videos
+- **Evaluation Framework**: Comprehensive testing visualization
 - **Terrain Diversity**: Analysis across varied environmental conditions
 
 ## Citation
 
 ```bibtex
-@misc{wang2025mirage,
+@inproceedings{wang2026mirage,
   title={MIRAGE: Masked Imitation for Robotic Action Generation and Execution},
   author={Wang, Puyue},
-  year={2025},
-  institution={University of Auckland},
-  note={COMPSCI 792 Project},
+  booktitle={Proceedings of the 39th International Conference on Machine Learning (ICML)},
+  year={2026},
+  organization={University of Auckland},
   url={https://github.com/tonywang-0517/Mirage}
 }
 ```
@@ -84,25 +96,36 @@ The project page uses modern web technologies:
 - **Bulma CSS** framework for responsive design
 - **Font Awesome** for icons
 - **Bulma Carousel** for image/video carousels
-- **Custom gradient styles** for brand consistency
+- **Custom CSS variables** for sand/gold theme consistency
+- **CSS gradient styles** for visual appeal
 - Optimized for performance and SEO
+
+### Theme Colors
+
+The page uses a sand/gold color theme defined in CSS variables:
+- Primary color: `#e8c99b` (light sand gold)
+- Primary hover: `#d4a574` (medium sand gold)
+- Primary dark: `#b8864a` (dark sand gold)
+- All colors are centrally managed through CSS variables in `static/css/index.css`
 
 ## Media Assets
 
 ### Images
 All images are properly referenced and positioned:
-- `poster_banner.jpg` - Used as hero section background overlay
-- `structure_overview.jpg` - Framework pipeline diagram & video poster
+- `bg.png` - Hero section background image
+- `mirage_overview.png` - Framework overview diagram
 - `teacher_training_stage1.jpg` - Stage 1 training visualization
 - `student_training_stage2.jpg` - Stage 2 training visualization
-- `mirage_eval_process.jpg` - Evaluation methodology & video poster
-- `method_comparison.png` - Comparison with baseline methods
-- `metrics_comparison.png` - Quantitative performance charts
+- `mirage_eval_process.jpg` - Evaluation methodology visualization
+- `method_comparison.png` - Ablation training curves comparison
+- `metrics_comparison1.png` - Training metrics comparison
+- `all_metrics_eval_combined.png` - Ablation results on Genesis test dataset
 - `terrain.png` - Terrain diversity analysis
 
 ### Videos
-- `g1_genesis_walk_g1.mp4` - G1 humanoid walking in Genesis simulator
-- `g1_isaaclab_walk_demo.mp4` - G1 humanoid sim-to-sim transfer in IsaacLab
+- **Evaluation Videos**: Six representative motions (punch, get up, high kick, common walk, side walk, martial) under zero-shot domain transfer
+- `g1_random_push.mp4` - Random perturbation recovery demonstration
+- `masked_mimic_g1_no_vae.mp4` - Teacher-student distillation demonstration
 
 ## Acknowledgments
 
