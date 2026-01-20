@@ -1,34 +1,58 @@
-/* Modern CSS Variables for consistent theming */
+/* Modern CSS Variables for consistent theming - LOOM Architecture Color Scheme */
 :root {
-  /* Sand/Gold Theme Colors - Lighter shades */
-  --primary-color: #e8c99b;
-  --primary-hover: #d4a574;
-  --primary-dark: #b8864a;
-  --secondary-color: #64748b;
-  --accent-color: #d4a574;
+  /* Soft Pastel Theme Colors - Matching LOOM architecture diagram */
+  /* Primary: Deeper purple/blue tones */
+  --primary-color: #9BAEDB;
+  --primary-hover: #8A9FCC;
+  --primary-dark: #6B85B8;
+  /* Secondary: Soft pink tones */
+  --secondary-color: #FFD1DC;
+  --secondary-hover: #FFB8C8;
+  --secondary-dark: #FFA5B8;
+  /* Accent: Cool purple (冷紫) */
+  --accent-color: #7B68EE;
+  --accent-hover: #9370DB;
+  --accent-light: #B19CD9;
+  /* Text colors */
   --text-primary: #1e293b;
   --text-secondary: #64748b;
   --text-light: #94a3b8;
+  /* Background: Soft pastel gradients */
   --background-primary: #ffffff;
-  --background-secondary: #f8fafc;
-  --background-accent: #f1f5f9;
-  --background-sand-light: #f5f7fa;
-  --border-color: #e2e8f0;
-  --border-sand: #e8c99b;
-  --border-sand-dark: #b8864a;
+  --background-secondary: linear-gradient(135deg, #F7E6EB 0%, #E6E9FA 50%, #E6F7E6 100%);
+  --background-secondary-solid: #F5F0F7;
+  --background-accent: linear-gradient(135deg, #FFD1DC 0%, #EBF7E0 100%);
+  --background-accent-solid: #FFF5F7;
+  --background-light: #FDFCFF;
+  /* Border colors */
+  --border-color: #E0BBE4;
+  --border-light: #F0E6F5;
+  --border-primary: #9BAEDB;
+  --border-primary-dark: #6B85B8;
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  /* Gradients */
-  --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-  --gradient-primary-light: linear-gradient(135deg, rgba(232, 201, 155, 0.1) 0%, rgba(184, 134, 74, 0.1) 100%);
-  --gradient-primary-medium: linear-gradient(135deg, rgba(232, 201, 155, 0.2) 0%, rgba(184, 134, 74, 0.2) 100%);
-  --gradient-accent: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  --gradient-subtle: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-  --gradient-box-light: linear-gradient(135deg, #f5f7fa 0%, #e8d5b7 100%);
-  --gradient-box-white: linear-gradient(to bottom, #ffffff, #f8f9fa);
+  /* Gradients - Matching architecture diagram */
+  /* Primary gradient: Deeper purple to soft pink */
+  --gradient-primary: linear-gradient(135deg, #9BAEDB 0%, #C7D2EE 25%, #FFD1DC 50%, #EBF7E0 100%);
+  --gradient-primary-light: linear-gradient(135deg, rgba(155, 174, 219, 0.1) 0%, rgba(199, 210, 238, 0.1) 25%, rgba(255, 209, 220, 0.1) 50%, rgba(235, 247, 224, 0.1) 100%);
+  --gradient-primary-medium: linear-gradient(135deg, rgba(155, 174, 219, 0.2) 0%, rgba(199, 210, 238, 0.2) 25%, rgba(255, 209, 220, 0.2) 50%, rgba(235, 247, 224, 0.2) 100%);
+  /* Accent gradient: Using cool purple */
+  --gradient-accent: linear-gradient(135deg, #7B68EE 0%, #9370DB 100%);
+  --gradient-accent-light: linear-gradient(135deg, rgba(123, 104, 238, 0.1) 0%, rgba(147, 112, 219, 0.1) 100%);
+  /* Vertical gradient: Soft pink/purple to soft green/yellow (like diagram modules) */
+  --gradient-vertical: linear-gradient(to bottom, #FFCCCC 0%, #FFD1DC 25%, #E0BBE4 50%, #EBF7E0 75%, #FFFACD 100%);
+  /* Horizontal gradient: Soft blue/purple to soft pink/red */
+  --gradient-horizontal: linear-gradient(to right, #C7D2EE 0%, #E0BBE4 25%, #FFD1DC 50%, #FFB8C8 75%, #FFCCCC 100%);
+  /* Subtle background gradient */
+  --gradient-subtle: linear-gradient(135deg, #E6E9FA 0%, #F7E6EB 50%, #E6F7E6 100%);
+  /* Box gradients */
+  --gradient-box-light: linear-gradient(135deg, #F5F0F7 0%, #FFF5F7 50%, #F5FFF5 100%);
+  --gradient-box-white: linear-gradient(to bottom, #ffffff, #FDFCFF);
+  /* Module-like gradient (for component boxes) */
+  --gradient-module: linear-gradient(to bottom, #FFD1DC 0%, #E0BBE4 25%, #EBF7E0 50%, #FFFACD 100%);
   /* Other */
   --border-radius: 12px;
   --border-radius-lg: 16px;
@@ -107,6 +131,7 @@ body {
 
 .hero.is-light {
   background: var(--background-secondary);
+  background: var(--background-secondary-solid);
   border-top: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
 }
@@ -167,7 +192,7 @@ body {
     color: var(--text-secondary);
     width: fit-content;
     font-weight: 600;
-    background: var(--background-accent);
+    background: var(--background-accent-solid);
     padding: 0.5rem 1rem;
     border-radius: var(--border-radius);
     margin-top: 1rem;
@@ -200,7 +225,7 @@ body {
     height: 2px;
     bottom: -2px;
     left: 0;
-    background: var(--gradient-accent);
+    background: var(--gradient-primary);
     transition: var(--transition);
 }
 
@@ -338,7 +363,7 @@ body {
   transform: translateX(-50%);
   width: 60px;
   height: 3px;
-  background: var(--gradient-accent);
+  background: var(--gradient-primary);
   border-radius: 2px;
 }
 
@@ -353,43 +378,42 @@ body {
   margin-bottom: 1.5rem;
 }
 
-/* Footer Improvements */
+/* Footer - Simplified */
 .footer {
-  background: var(--background-secondary);
-  border-top: 1px solid var(--border-color);
-  padding: 3rem 1.5rem;
+  background: #fafafa;
+  border-top: 1px solid #e0e0e0;
+  padding: 2rem 1.5rem;
 }
 
 .footer .content {
-  color: var(--text-secondary);
+  color: #666;
   line-height: 1.7;
+  font-size: 0.9rem;
 }
 
 .footer a {
-  color: var(--primary-color);
-  text-decoration: none;
-  transition: var(--transition);
-}
-
-.footer a:hover {
-  color: var(--primary-hover);
+  color: #666;
   text-decoration: underline;
 }
 
-/* BibTeX Styling */
+.footer a:hover {
+  color: #333;
+}
+
+/* BibTeX Styling - Simplified */
 pre {
-  background: var(--background-accent) !important;
-  border: 1px solid var(--border-color) !important;
-  border-radius: var(--border-radius) !important;
-  padding: 1.5rem !important;
+  background: #f5f5f5 !important;
+  border: none !important;
+  border-radius: 4px !important;
+  padding: 1rem !important;
   font-size: 0.9rem !important;
   overflow-x: auto;
-  box-shadow: var(--shadow-sm);
+  margin: 0 !important;
 }
 
 code {
-  background: var(--background-accent) !important;
-  color: var(--text-primary) !important;
+  background: transparent !important;
+  color: #333 !important;
   font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace !important;
 }
 

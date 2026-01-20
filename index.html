@@ -2,22 +2,22 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="MIRAGE: Robust Humanoid Control under Dynamics Mismatch - A lightweight framework for robust whole-body humanoid control">
-  <meta property="og:title" content="MIRAGE: Robust Humanoid Control under Dynamics Mismatch"/>
-  <meta property="og:description" content="A lightweight execution framework for robust whole-body humanoid control with standardized data"/>
-  <meta property="og:url" content="https://tonywang-0517.github.io/mirage.github.io"/>
-  <meta property="og:image" content="https://tonywang-0517.github.io/mirage.github.io/static/images/poster_banner.jpg" />
+  <meta name="description" content="LOOM: A Long-horizon-orientated Fusion Paradigm for Vision-Language-Action Model - Persistent global LOOM query paradigm for long-horizon manipulation">
+  <meta property="og:title" content="LOOM: A Long-horizon-orientated Fusion Paradigm for Vision-Language-Action Model"/>
+  <meta property="og:description" content="A persistent global LOOM query paradigm that maintains task intent across all policy layers for long-horizon manipulation"/>
+  <meta property="og:url" content="https://tonywang-0517.github.io/loom.github.io"/>
+  <meta property="og:image" content="https://tonywang-0517.github.io/loom.github.io/static/images/framework.png" />
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
 
-  <meta name="twitter:title" content="MIRAGE: Robust Humanoid Control under Dynamics Mismatch">
-  <meta name="twitter:description" content="A lightweight execution framework for robust whole-body humanoid control">
-  <meta name="twitter:image" content="https://tonywang-0517.github.io/mirage.github.io/static/images/poster_banner.jpg">
+  <meta name="twitter:title" content="LOOM: A Long-horizon-orientated Fusion Paradigm for Vision-Language-Action Model">
+  <meta name="twitter:description" content="Persistent global LOOM query paradigm for long-horizon manipulation">
+  <meta name="twitter:image" content="https://tonywang-0517.github.io/loom.github.io/static/images/framework.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="keywords" content="humanoid robotics, imitation learning, reinforcement learning, whole-body control, VLA systems, masked motion">
+  <meta name="keywords" content="vision-language-action models, robotic manipulation, long-horizon tasks, persistent global query, VLA systems, LOOM query">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <title>MIRAGE: Robust Humanoid Control under Dynamics Mismatch</title>
+  <title>LOOM: A Long-horizon-orientated Fusion Paradigm for Vision-Language-Action Model</title>
   <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   
@@ -34,11 +34,27 @@
   <script src="static/js/bulma-carousel.min.js"></script>
   <script src="static/js/bulma-slider.min.js"></script>
   <script src="static/js/index.js"></script>
+  
+  <!-- MathJax for LaTeX rendering -->
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
   <style>
     .hero.is-fullheight {
-      background-color: var(--primary-color);
-      background-image: url('static/images/bg.png');
+      background: linear-gradient(135deg, #E6E9FA 0%, #DCE3F9 25%, #F7E6EB 50%, #F9DCE3 75%, #E6F7E6 100%);
       background-position: center center;
       background-size: cover;
       background-repeat: no-repeat;
@@ -70,26 +86,27 @@
       margin: auto;
     }
     .gradient-text {
-      background: var(--gradient-primary);
+      background: linear-gradient(135deg, #9BAEDB 0%, #7B68EE 20%, #9370DB 40%, #E0BBE4 60%, #f8e3e6 80%, #e68297 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       font-weight: bold;
     }
     .highlight-title {
-      color: var(--primary-color);
+      color: #9BAEDB;
       font-weight: bold;
       margin-bottom: 1.5rem !important;
     }
     .component-box {
-      background: var(--background-secondary);
-      border-left: 4px solid var(--primary-color);
+      background: linear-gradient(to bottom, rgba(155, 174, 219, 0.2) 0%, rgba(199, 210, 238, 0.2) 25%, rgba(224, 187, 228, 0.3) 50%, rgba(235, 247, 224, 0.3) 75%, rgba(255, 250, 205, 0.3) 100%);
+      border-left: 4px solid #9BAEDB;
       padding: 1.5rem;
       margin-bottom: 1rem;
       border-radius: 8px;
       height: 100%;
       display: flex;
       flex-direction: column;
+      box-shadow: var(--shadow-sm);
     }
     
     .component-box h3 {
@@ -118,20 +135,24 @@
       flex-grow: 1;
     }
     .metric-card {
-      background: var(--gradient-primary);
-      color: white;
+      background: linear-gradient(135deg, #9BAEDB 0%, #C7D2EE 20%, #E0BBE4 40%, #FFD1DC 60%, #EBF7E0 100%);
+      color: var(--text-primary);
       padding: 2rem;
       border-radius: 10px;
       text-align: center;
       height: 100%;
+      box-shadow: var(--shadow-md);
+      border: 1px solid rgba(155, 174, 219, 0.3);
     }
     .metric-card .title {
-      color: white;
+      color: var(--text-primary);
       font-size: 3rem;
       margin-bottom: 1.5rem;
+      font-weight: 700;
     }
     .metric-card .subtitle {
-      color: rgba(255, 255, 255, 0.9);
+      color: var(--text-secondary);
+      font-weight: 500;
     }
   </style>
 </head>
@@ -143,21 +164,18 @@
           <div class="column has-text-centered">
             <div class="content-box">
               <h1 class="title is-1 publication-title is-size-2-mobile" style="font-size: 5rem; margin-bottom: 1rem;">
-                <span class="gradient-text">MIRAGE</span>
+                <span class="gradient-text">LOOM</span>
               </h1>
               <h1 class="title is-3 publication-title is-size-4-mobile" style="margin-bottom: 0.5rem;">
-                Robust Humanoid Control under Dynamics Mismatch
+                A Long-horizon-orientated Fusion Paradigm for Vision-Language-Action Model
               </h1>
-              <p class="is-size-6" style="margin-bottom: 1.5rem; color: rgba(255, 255, 255, 0.9);">
-                MIRAGE (Masked Imitation for Robotic Action Generation and Execution)
-              </p>
+              <div style="margin-top: -5rem; margin-bottom: -3.5rem;">
+                <img src="static/images/logo.png" alt="LOOM Logo" style="max-width: 200px; height: auto; display: block; margin: 0 auto; padding: 0;">
+              </div>
     
               <div class="is-size-5 publication-authors" style="margin-bottom: 0.8rem;">
                 <span class="author-block">
                   <a href="https://github.com/tonywang-0517" target="_blank">Puyue Wang</a><sup>*</sup>,
-                  </span>
-                <span class="author-block">
-                  <a href="#" target="_blank">Jiawei Hu</a><sup>*</sup>,
                   </span>
                 <!-- <span class="author-block">
                   <a href="#" target="_blank">Guo Li</a>,
@@ -167,7 +185,7 @@
                   </span>
                   </div>
               <div class="is-size-6 publication-authors" style="margin-bottom: 0.5rem; font-size: 0.85rem; color: #666;">
-                <span class="author-block"><sup>*</sup>Co-first authors, <sup>†</sup>Corresponding author</span>
+                <span class="author-block"><sup>*</sup>First author, <sup>†</sup>Corresponding author</span>
                   </div>
 
               <div class="is-size-6 publication-authors" style="margin-bottom: 1.5rem;">
@@ -185,7 +203,7 @@
                       </a>
                     </span>
                   <span class="link-block">
-                    <a target="_blank" href="https://github.com/hong-labs/Mirage" class="external-link button is-normal is-rounded is-dark">
+                    <a target="_blank" href="https://github.com/tonywang-0517/loom" class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fab fa-github"></i>
                     </span>
@@ -211,20 +229,35 @@
 </section>
 
 <!-- Paper abstract -->
-<section class="section hero is-light">
+<section class="section hero" style="background-color: white;">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column">
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Achieving robust <strong>whole-body humanoid control</strong> under dynamics mismatch remains a central challenge in robotics. In this work, we present <strong class="gradient-text">MIRAGE</strong> (Masked Imitation for Robotic Action Generation and Execution), <strong>a lightweight execution framework</strong> that achieves substantially higher success rates under domain shifts, enabling reliable zero-shot sim-to-sim transfer to unseen physics engines where prior methods degrade or fail. Rather than decomposing behaviors into multiple experts or relying on target-domain adapters, MIRAGE employs a single PD control policy operating from standardized sparse commands and a history-conditioned representation.
+            Long-horizon, language-guided robotic manipulation requires generating coherent action sequences while effectively utilizing the semantic and compositional knowledge encoded in large vision–language models. However, existing Vision–Language–Action (VLA) models often underutilize vision–language features before action generation, limiting their ability to sustain instruction-following behavior over extended horizons. Through experimental analysis of mainstream VLA architectures, we identify a limitation in the fusion between vision–language representations and action generation, which restricts the ability of policy heads to fully exploit rich vision–language features and limits performance on long-horizon tasks.
           </p>
           <p>
-            Our framework introduces two key innovations: <strong>SCHEMA</strong> (Sparse Command Handling for Embodied Motion Abstraction), a standardized sparse-joint protocol based on SMPL-X keypoints that consolidates fragmented motion sources; and <strong>MIRROR</strong> (Memory-Integrated Robust Representation for Online Robustness), a history-conditioned control policy that leverages recent state–action sequences as implicit dynamics memory, significantly improving stability and sim-to-sim transfer.
+            To address this issue, we propose <strong class="gradient-text">LOOM</strong>, a <strong>persistent global LOOM query paradigm</strong>, in which a single global LOOM query is shared across all policy layers to aggregate and reuse vision–language constraints throughout action generation. This design introduces an inductive bias for maintaining task intent and compositional constraints over long horizons without adding extra supervision or task-specific heuristics.
           </p>
           <p>
-            Extensive experiments on a Unitree-style G1 humanoid demonstrate that MIRAGE achieves <strong>90.7%</strong> success rate in the training simulator (IsaacLab) and <strong>86.0%</strong> success rate in zero-shot transfer to an unseen domain (Genesis), significantly outperforming strong baselines including MaskedMimic, OmniH2O, ExBody2, and Hover.
+            We validate our approach on <strong>CALVIN</strong> and <strong>LIBERO</strong> benchmarks. Experimental results demonstrate that our method achieves significant improvements in success rates on long-horizon tasks and exhibits strong generalization capabilities, outperforming prior state-of-the-art approaches with gains of <strong>+1.1%</strong> on LIBERO-Long and <strong>+5.5%</strong> on CALVIN.
+          </p>
+        </div>
+        
+        <div class="box" style="background: linear-gradient(135deg, rgba(155, 174, 219, 0.1) 0%, rgba(255, 209, 220, 0.1) 100%); padding: 1.5rem; margin-top: 2rem; border-left: 4px solid #7B68EE;">
+          <h4 class="title is-5" style="margin-bottom: 1rem;">
+            <span class="gradient-text">Background and Motivation</span>
+          </h4>
+          <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 1rem;">
+            Training robots for long-horizon, language-guided manipulation tasks using Vision-Language-Action (VLA) models remains a substantial challenge. While VLA models have excelled in learning complex manipulation behaviors, most research focuses on optimizing short-horizon behaviors. When long-horizon sequences are considered, it is common to stitch multiple policies together, which is undesirable as we want robots to autonomously discover optimal behaviors without handcrafting primitives.
+          </p>
+          <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 1rem;">
+            The challenge of maintaining task intent compounds dramatically with longer time horizons. Existing VLA models often underutilize vision–language features before action generation: intermediate constraints extracted from vision–language models are not explicitly maintained or reused during action generation, and small representation mismatches accumulate across timesteps and stages, leading to failure in long-horizon, multi-stage execution.
+          </p>
+          <p style="font-size: 1.05rem; line-height: 1.8; margin: 0;">
+            To solve the constraint propagation problem in long-horizon manipulation, recent work has explored using additional queries to bridge vision-language representations to action spaces. However, these approaches typically employ a <em>layer-local</em> formulation, where each policy layer maintains its own independent query tokens. We identify a fundamental limitation: conditioning each policy layer on an independently generated query implicitly bottlenecks the propagation of vision–language constraints across layers. When task intent must be preserved across extended execution horizons, the independent processing of queries at each layer prevents effective constraint propagation, and small representation gaps between layers can compound into failure across multi-stage execution.
           </p>
         </div>
       </div>
@@ -233,45 +266,95 @@
 </section>
 <!-- End paper abstract -->
 
+<!-- Main Contributions -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Main Contributions</h2>
+    <div class="columns is-multiline" style="margin-top: 2rem;">
+      <div class="column is-4">
+        <div class="box" style="height: 100%; border-left: 4px solid #7B68EE; background: linear-gradient(to bottom, rgba(155, 174, 219, 0.1) 0%, rgba(255, 209, 220, 0.1) 100%);">
+          <h4 class="title is-5" style="margin-bottom: 1rem;">
+            <span class="icon-text">
+              <span class="icon" style="color: #7B68EE;"><i class="fas fa-search"></i></span>
+              <span>1. Identification</span>
+            </span>
+          </h4>
+          <p style="line-height: 1.7;">
+            Through experimental analysis of mainstream VLA architectures, we identify and demonstrate a fundamental limitation in the layer-local query fusion paradigm: it implicitly bottlenecks constraint propagation in long-horizon tasks, preventing effective task intent maintenance across extended execution horizons.
+          </p>
+        </div>
+      </div>
+      
+      <div class="column is-4">
+        <div class="box" style="height: 100%; border-left: 4px solid #7B68EE; background: linear-gradient(to bottom, rgba(155, 174, 219, 0.1) 0%, rgba(255, 209, 220, 0.1) 100%);">
+          <h4 class="title is-5" style="margin-bottom: 1rem;">
+            <span class="icon-text">
+              <span class="icon" style="color: #7B68EE;"><i class="fas fa-lightbulb"></i></span>
+              <span>2. Innovation</span>
+            </span>
+          </h4>
+          <p style="line-height: 1.7;">
+            We innovatively propose a persistent global LOOM query paradigm that maintains task intent across all policy layers, fundamentally changing how LOOM queries function in VLA architectures. LOOM introduces a persistent global LOOM query shared across all policy layers, which aggregates and maintains vision-language constraints from all VLM layers as a stable structure throughout action generation.
+          </p>
+        </div>
+      </div>
+      
+      <div class="column is-4">
+        <div class="box" style="height: 100%; border-left: 4px solid #7B68EE; background: linear-gradient(to bottom, rgba(155, 174, 219, 0.1) 0%, rgba(255, 209, 220, 0.1) 100%);">
+          <h4 class="title is-5" style="margin-bottom: 1rem;">
+            <span class="icon-text">
+              <span class="icon" style="color: #7B68EE;"><i class="fas fa-chart-line"></i></span>
+              <span>3. Results</span>
+            </span>
+          </h4>
+          <p style="line-height: 1.7;">
+            Rich experiments show that LOOM achieves state-of-the-art performance on long-horizon manipulation tasks (<strong>+1.1%</strong> on LIBERO-Long, <strong>+5.5%</strong> on CALVIN) while maintaining efficiency with minimal architectural modifications.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Key Metrics -->
 <section class="section">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered"><span class="gradient-text">MIRAGE</span> Performance Highlights</h2>
+    <h2 class="title is-3 has-text-centered"><span class="gradient-text">LOOM</span> Performance Highlights</h2>
     <div class="columns is-multiline" style="margin-top: 2rem;">
       <div class="column is-3">
-        <div class="metric-card">
-          <p class="title">90.7%</p>
-          <p class="subtitle">Success Rate<br>IsaacLab<br>(Training)</p>
+        <div class="metric-card" style="color: white;">
+          <p class="title" style="color: white;">98.4%</p>
+          <p class="subtitle" style="color: white;">Average Success Rate<br>LIBERO<br>(Overall)</p>
         </div>
       </div>
       <div class="column is-3">
-        <div class="metric-card">
-          <p class="title">88.4%</p>
-          <p class="subtitle">Success Rate<br>IsaacLab + DR<br>(Training)</p>
+        <div class="metric-card" style="color: white;">
+          <p class="title" style="color: white;">97.5%</p>
+          <p class="subtitle" style="color: white;">Success Rate<br>LIBERO-Long<br>(+1.1% improvement)</p>
         </div>
       </div>
       <div class="column is-3">
-        <div class="metric-card">
-          <p class="title">86.0%</p>
-          <p class="subtitle">Success Rate<br>Genesis<br>(Zero-Shot)</p>
+        <div class="metric-card" style="color: white;">
+          <p class="title" style="color: white;">82.0%</p>
+          <p class="subtitle" style="color: white;">Success Rate<br>CALVIN (5 tasks)<br>(+5.5% improvement)</p>
         </div>
      </div>
       <div class="column is-3">
-        <div class="metric-card">
-          <p class="title">84.4%</p>
-          <p class="subtitle">Success Rate<br>Genesis + DR<br>(Zero-Shot)</p>
+        <div class="metric-card" style="color: white;">
+          <p class="title" style="color: white; font-size: 2rem; padding-bottom: .5rem; padding-top: 0.5rem;">215.8 Hz</p>
+          <p class="subtitle" style="color: white;">Inference Speed<br>99.1M Params<br>(High Efficiency)</p>
     </div>
   </div>
      </div>
-    <div class="box has-text-centered" style="margin-top: 2rem; background: var(--gradient-primary-light); border: 2px solid var(--primary-color);">
+    <div class="box has-text-centered" style="margin-top: 2rem; background: linear-gradient(135deg, rgba(155, 174, 219, 0.15) 0%, rgba(199, 210, 238, 0.15) 25%, rgba(255, 209, 220, 0.15) 50%, rgba(235, 247, 224, 0.15) 100%); border: 2px solid #9BAEDB;">
       <h4 class="title is-4">
         <span class="icon-text">
           <span class="icon"><i class="fas fa-rocket"></i></span>
-          <span>Sim-to-Sim Transfer Excellence</span>
+          <span>Long-horizon Task Excellence</span>
         </span>
       </h4>
       <p class="is-size-5">
-        MIRAGE achieves <strong class="gradient-text">86.0%</strong> success rate in zero-shot transfer to Genesis (unseen domain), outperforming ExBody2 (<strong>73.1%</strong>) and OmniH2O (<strong>72.3%</strong>). Under domain randomization, MIRAGE maintains <strong class="gradient-text">84.4%</strong> success rate while most baselines experience substantial performance degradation.
+        LOOM achieves <strong class="gradient-text">97.5%</strong> success rate on LIBERO-Long, outperforming VLA-Adapter-Pro (<strong>96.4%</strong>) by <strong class="gradient-text">+1.1%</strong>. On CALVIN, LOOM achieves <strong class="gradient-text">82.0%</strong> for completing 5 tasks in a row, outperforming VLA-Adapter-Pro (<strong>76.5%</strong>) by <strong class="gradient-text">+5.5%</strong>, demonstrating strong generalization capabilities on long-horizon tasks.
       </p>
 </div>
 </div>
@@ -282,16 +365,13 @@
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column">
-        <h2 class="title is-2 has-text-centered"><span class="gradient-text">MIRAGE</span> Framework</h2>
+        <h2 class="title is-2 has-text-centered"><span class="gradient-text">LOOM</span> Framework</h2>
         <div class="content has-text-centered">
           <figure class="image">
-            <img src="static/images/mirage_overview.png" alt="MIRAGE Framework Overview">
+            <img src="static/images/framework.png" alt="LOOM Framework Overview">
           </figure>
           <p class="has-text-grey" style="margin-top: 1rem;">
-            <span class="gradient-text">MIRAGE</span> is a lightweight execution framework that realizes sparse-to-PD control 
-            through a teacher-student architecture. At a high level, MIRAGE learns a single high-frequency policy that maps 
-            sparse motion commands (SCHEMA), local observations, and a short history of recent interaction (MIRROR) into PD 
-            control targets for a humanoid robot, while remaining robust to changes in dynamics through structured domain randomization.
+            <span class="gradient-text">LOOM</span> is a long-horizon-orientated fusion paradigm for Vision-Language-Action models that employs a persistent global LOOM query shared across all policy layers to maintain task intent throughout action generation. The framework consists of three key components: (1) VLM backbone that processes vision and language inputs, (2) Persistent Global LOOM Query <span style="font-family: 'Times New Roman', serif; font-style: italic;">Q</span><sub>G</sub> that aggregates and maintains vision-language constraints as a stable structure throughout action generation, (3) Policy network that integrates the global persistent LOOM tokens C<sup>G</sup><sub>t</sub> across all layers.
           </p>
         </div>
       </div>
@@ -299,474 +379,743 @@
   </div>
 </section>
 
-<!-- Key Components -->
+<!-- Related Work -->
 <section class="section is-light">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Two Core Innovations</h2>
-    <div class="columns is-multiline" style="margin-top: 2rem;">
-      <div class="column is-6">
-        <div class="component-box">
-          <h3 class="title is-4">
-            <span class="icon-text">
-              <span class="icon"><i class="fas fa-code"></i></span>
-              <span class="gradient-text">SCHEMA</span>
-            </span>
-          </h3>
-          <p class="subtitle is-6"><strong>Standardized Sparse Command Interface</strong></p>
-          <p>SCHEMA defines a unified sparse-joint protocol based on SMPL-X keypoints, consolidating fragmented motion sources into a single training and execution format. It enables large-scale humanoid trajectory generation from datasets such as AMASS, where human motion sequences are retargeted to the humanoid, downsampled, and projected onto a set of SMPL-X key joints (e.g., hips, knees, ankles, shoulders, elbows, wrists). This standardized interface decouples perception and planning from low-level actuation, allowing different upstream generators to produce interchangeable SCHEMA packets without modifying the controller or training pipeline.</p>
+    <h2 class="title is-3 has-text-centered">Related Work</h2>
+    <div class="content has-text-justified" style="margin-top: 2rem;">
+      
+      <h3 class="title is-5" style="margin-top: 2rem; margin-bottom: 1rem;">
+        <span class="gradient-text">Vision-Language-Action Models</span>
+      </h3>
+      <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.5rem;">
+        Vision-Language-Action (VLA) models enable robots to perform manipulation tasks from natural language instructions. Early work demonstrated the potential of combining vision-language understanding with robotic control. Recent methods bridge perception and action through various paradigms: using raw features from VLMs, employing additional queries as interfaces, or fine-tuning VLMs on robotic data. VLA-Adapter-Pro introduced a lightweight bridging paradigm using query tokens (additional queries) to aggregate multimodal information. Dual-system VLA architectures use intermediate latent tokens to connect VLMs and Policy networks, focusing on coordination between systems.
+      </p>
+      
+      <h3 class="title is-5" style="margin-top: 2rem; margin-bottom: 1rem;">
+        <span class="gradient-text">LOOM Query Design in VLA Models</span>
+      </h3>
+      <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.5rem;">
+        Bridge paradigms from vision-language (VL) to action (A) can be categorized by feature type (Raw features vs Additional Query) and which layer features are used (Last, Intermediate, or All layers). VLA architectures employ different fusion strategies to integrate vision-language information into action generation:
+      </p>
+      
+      <div class="columns is-multiline" style="margin-top: 1.5rem;">
+        <div class="column is-6">
+          <div class="box" style="height: 100%; background: white; padding: 1.5rem; border-left: 3px solid #9BAEDB;">
+            <h5 class="title is-6" style="margin-bottom: 0.8rem;">
+              <strong>Raw Features Paradigm</strong>
+            </h5>
+            <ul style="margin-left: 1.5rem; line-height: 1.8; font-size: 0.95rem;">
+              <li><strong>RoboVLMs:</strong> Raw features at last layer</li>
+              <li><strong>GR00T N1:</strong> Raw features at intermediate layer</li>
+              <li><strong>π₀:</strong> Raw features at all layers</li>
+            </ul>
+            <p style="margin-top: 0.8rem; font-size: 0.9rem; color: #666;">
+              This approach is simple and computationally efficient, but raw features are optimized for vision-language understanding rather than action generation, creating a modality gap.
+            </p>
+          </div>
+        </div>
+        
+        <div class="column is-6">
+          <div class="box" style="height: 100%; background: white; padding: 1.5rem; border-left: 3px solid #7B68EE;">
+            <h5 class="title is-6" style="margin-bottom: 0.8rem;">
+              <strong>Additional Query Paradigm</strong>
+            </h5>
+            <ul style="margin-left: 1.5rem; line-height: 1.8; font-size: 0.95rem;">
+              <li><strong>OpenVLA-OFT:</strong> Additional queries at last layer</li>
+              <li><strong>VLA-Adapter-Pro:</strong> Additional queries (layer-local) at all layers</li>
+              <li><strong class="gradient-text">LOOM (Ours):</strong> Additional queries (persistent global) at all layers</li>
+            </ul>
+            <p style="margin-top: 0.8rem; font-size: 0.9rem; color: #666;">
+              Learnable queries can be optimized specifically for action generation. However, most existing methods use <em>layer-local</em> formulation where each policy layer processes queries independently, which may limit constraint propagation in long-horizon tasks.
+            </p>
+          </div>
         </div>
       </div>
       
-      <div class="column is-6">
+      <div class="box" style="background: linear-gradient(135deg, rgba(255, 209, 220, 0.15) 0%, rgba(235, 247, 224, 0.15) 100%); padding: 1.5rem; margin-top: 2rem; border-left: 4px solid #7B68EE;">
+        <h5 class="title is-5" style="margin-bottom: 1rem;">
+          <span class="gradient-text">Paradigm Shift: Layer-Local → Persistent Global</span>
+        </h5>
+        <p style="line-height: 1.8;">
+          The <em>layer-local</em> paradigm has emerged as the dominant approach in query-based VLA architectures. In this paradigm, each policy layer maintains its own independent query tokens processed separately through layer-specific cross-attention mechanisms. While this design provides flexibility, it may limit constraint propagation in long-horizon tasks where task intent must be preserved across extended execution horizons.
+        </p>
+        <p style="line-height: 1.8; margin-top: 1rem;">
+          LOOM proposes a <strong>paradigm shift</strong> to <em>persistent global</em> LOOM query formulation, where a single global LOOM query is shared across all policy layers. Unlike layer-local formulations where query tokens are processed independently at each layer, persistent global formulation shares a single global query across all layers, ensuring consistent task intent throughout action generation. This paradigm shift fundamentally changes how LOOM queries function in VLA architectures, providing a stronger inductive bias for sustaining instruction-following behavior over extended horizons.
+        </p>
+      </div>
+      
+      <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem; border-left: 3px solid #9BAEDB;">
+        <p style="font-size: 0.95rem; line-height: 1.7; margin: 0;">
+          <strong>Beyond VLA:</strong> Recent work in multimodal large language models uses learnable query tokens as structured interfaces to expose rich upstream representations to downstream generators, such as MetaQueries connecting MLLMs with diffusion models. While conceptually related in adopting queries as information carriers, these methods target cross-modal generation, whereas we study VLA policies for robotic control and use a persistent global LOOM query to preserve and reuse vision-language constraints across policy layers for long-horizon execution.
+        </p>
+      </div>
+      
+      <h3 class="title is-5" style="margin-top: 2.5rem; margin-bottom: 1rem;">
+        <span class="gradient-text">Long-Horizon Manipulation</span>
+      </h3>
+      <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.5rem;">
+        Long-horizon manipulation tasks require maintaining task intent across extended execution horizons. Early work decomposed long-horizon tasks into sequences of shorter subtasks, while recent methods use memory mechanisms or recurrent architectures to maintain state information across time steps. These approaches focus on temporal state maintenance rather than maintaining task intent throughout the policy architecture itself.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Key Components -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Core Innovation</h2>
+    <div class="columns is-multiline" style="margin-top: 2rem;">
+      <div class="column is-12">
         <div class="component-box">
           <h3 class="title is-4">
             <span class="icon-text">
-              <span class="icon"><i class="fas fa-brain"></i></span>
-              <span class="gradient-text">MIRROR</span>
+              <span class="icon"><i class="fas fa-link"></i></span>
+              <span class="gradient-text">Persistent Global LOOM Query Paradigm</span>
             </span>
           </h3>
-          <p class="subtitle is-6"><strong>History-Integrated Dynamics Memory</strong></p>
-          <p>MIRROR aggregates a short window of past states and actions into a fixed-dimensional history embedding using a QFormer-style memory extractor. Rather than flattening the history through a simple feed-forward encoder, MIRROR performs early fusion between a learned memory-factor prior and the recent interaction trace. The resulting memory token is injected via a residual connection into the latent control representation, enabling the controller to modulate its decisions based on inferred dynamics. This provides domain awareness, allowing the policy to disambiguate which realization of the randomized dynamics it is currently operating in and adjust its control strategy accordingly. Empirically, removing MIRROR significantly degrades sim-to-sim transfer and recovery performance.</p>
+          <p class="subtitle is-6"><strong>Maintaining Task Intent Across All Policy Layers</strong></p>
+          <p>LOOM introduces a persistent global LOOM query <span style="font-family: 'Times New Roman', serif; font-style: italic;">Q</span><sub>G</sub> that is shared across all policy layers, fundamentally changing how queries function in VLA architectures. Unlike layer-local formulations where each policy layer processes query tokens independently, LOOM's persistent global formulation aggregates and maintains vision-language constraints from all VLM layers as a stable structure throughout action generation. The persistent global query <span style="font-family: 'Times New Roman', serif; font-style: italic;">Q</span><sub>G</sub> aggregates information from all VLM layers to produce global persistent LOOM tokens C<sup>G</sup><sub>t</sub> containing both task and action information from all layers, maintaining task intent across all policy layers. This design provides a stronger inductive bias for sustaining instruction-following behavior over extended horizons, addressing the fundamental limitation in layer-local query fusion paradigms that implicitly bottleneck constraint propagation in long-horizon tasks.</p>
+          
+          <div style="background: white; padding: 1rem; border-radius: 8px; margin-top: 1rem; border-left: 3px solid #7B68EE;">
+            <p style="margin: 0; font-size: 0.95rem; font-style: italic;">
+              <strong>Motivation:</strong> Prior studies have observed that intermediate-layer representations can exhibit higher utility in certain challenging subtasks, suggesting that discarding intermediate information during action generation may limit long-horizon capabilities. This observation motivated our design of persistent global LOOM query formulation, which aggregates information from all VLM layers rather than relying on a single layer, enabling better constraint propagation across extended execution horizons.
+            </p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Training Methodology -->
+<!-- Methodology -->
 <section class="section is-light">
   <div class="container is-max-desktop">
     <h2 class="title is-3 has-text-centered">
-      <i class="fas fa-cogs"></i> Training Methodology
+      <i class="fas fa-cogs"></i> Methodology
     </h2>
     <div class="content has-text-justified" style="margin-top: 2rem;">
       <div class="box" style="background: white; padding: 2rem;">
-        <h3 class="title is-5"><span class="gradient-text">Two-Stage Training Architecture</span></h3>
-        <p>
-          MIRAGE employs a <strong>teacher-student framework</strong> to realize sparse-to-PD control. 
-          The training process consists of two stages: (1) a goal-conditioned expert policy is trained 
-          with reinforcement learning under domain-randomized dynamics, and (2) a compact student 
-          policy is distilled from this expert using DAgger-style online imitation, operating directly 
-          from SCHEMA-formatted sparse commands and history-conditioned inputs.
+        <h3 class="title is-5"><span class="gradient-text">Problem Formulation</span></h3>
+        <p style="margin-bottom: 1rem;">
+          Let us consider the VLA model as a mapping from vision-language representations to action sequences. At timestep <em>t</em>, the VLM processes inputs {X<sup>v</sup><sub>t</sub>, X<sup>g</sup><sub>t</sub>, L<sub>t</sub>, <span style="font-family: 'Times New Roman', serif; font-style: italic;">Q</span><sub>A</sub>}: third-view image X<sup>v</sup><sub>t</sub>, gripper image X<sup>g</sup><sub>t</sub>, instruction L<sub>t</sub>, and LOOM query tokens <span style="font-family: 'Times New Roman', serif; font-style: italic;">Q</span><sub>A</sub>. The VLM outputs Raw latent features C<sup>R</sup><sub>t,τ</sub> and LOOM Query latent features C<sup>LQ</sup><sub>t,τ</sub> from each layer τ ∈ {1, 2, ..., M}, which serve as conditions for the Policy network.
+        </p>
+        <p style="margin-bottom: 1rem;">
+          The action generation process maps vision-language constraints to actions. In <em>layer-local</em> formulations, each policy layer τ processes queries independently using features from the corresponding VLM layer τ. In contrast, <em>persistent global</em> LOOM query formulation maintains task intent explicitly by sharing a global query across all policy layers, aggregating information from all VLM layers to produce global persistent LOOM tokens that remain consistent across all policy layers.
         </p>
         
-        <h3 class="title is-5" style="margin-top: 1.5rem;"><span class="gradient-text">Stage 1: Teacher Training</span></h3>
+        <div style="background: var(--background-secondary); padding: 1rem; border-radius: 6px; margin-top: 1rem; border-left: 3px solid var(--primary-color);">
+          <p style="margin: 0; font-size: 0.95rem; font-style: italic;">
+            <strong>Preliminaries:</strong> We apply our persistent global LOOM query paradigm to VLA-Adapter-Pro, which bridges vision-language representations to action space using learnable query tokens (additional queries).
+          </p>
+        </div>
+        
+        <h3 class="title is-5" style="margin-top: 2rem;"><span class="gradient-text">Motivation: A Paradigm Shift from Layer-Local to Persistent Global</span></h3>
+        <p style="margin-bottom: 1rem;">
+          Existing query-based VLA architectures employ a <em>layer-local</em> paradigm where each policy layer processes query tokens independently. In long-horizon tasks, this independent processing limits the ability to maintain persistent task intent across layers. Prior studies have observed that intermediate-layer representations can exhibit higher utility in certain challenging subtasks, suggesting that discarding intermediate information during action generation may limit long-horizon capabilities. We propose a paradigm shift to <em>persistent global</em> LOOM query formulation, where a single global LOOM query is shared across all policy layers, aggregating and maintaining vision-language constraints from all VLM layers as a stable structure throughout action generation.
+        </p>
+        
+        <h3 class="title is-5" style="margin-top: 2rem;"><span class="gradient-text">Persistent Global LOOM Query Design</span></h3>
+        <p>
+          LOOM introduces a persistent global LOOM query <span style="font-family: 'Times New Roman', serif; font-style: italic;">Q</span><sub>G</sub> ∈ ℝ<sup>N × d<sub>q</sub></sup> that is shared across all policy layers, where <em>N</em> is the number of LOOM query tokens and <em>d<sub>q</sub></em> is the query dimension. The persistent global query <span style="font-family: 'Times New Roman', serif; font-style: italic;">Q</span><sub>G</sub> is initialized randomly and learned from scratch.
+        </p>
+        
+        <h3 class="title is-5" style="margin-top: 1.5rem;"><span class="gradient-text">Aggregation Mechanism</span></h3>
         <p style="margin-top: 1rem; font-size: 1.05rem; line-height: 1.8;">
-          The teacher policy π⋆ is a <strong>goal-conditioned reinforcement learning policy</strong> trained 
-          in simulation under domain-randomized dynamics. It receives the current state s<sub>t</sub>, a dense 
-          short-horizon reference motion g<sub>full</sub><sup>t</sup> retargeted from <strong>AMASS</strong>, 
-          terrain features h<sub>terr</sub><sup>t</sup>, and a history-based embedding of recent states and actions. 
-          The teacher is optimized with PPO and generalized advantage estimation (GAE), maximizing a reward 
-          that combines kinematic tracking terms, balance and contact consistency penalties, control-effort 
-          regularization, and a fall penalty.
+          At each timestep <em>t</em>, the persistent global query aggregates vision-language constraints from all <em>M</em> VLM layers. For each VLM layer τ, we extract task tokens (vision patches) and action tokens (from text hidden states at action positions), then concatenate them within each layer. The Aggregate mechanism then concatenates these task-action token pairs from all VLM layers along the layer dimension:
+        </p>
+        <p style="text-align: center; margin: 1.5rem 0; font-size: 1.2rem; font-family: 'Times New Roman', serif;">
+          C<sup>G</sup><sub>t</sub> = Aggregate(<span style="font-style: italic;">Q</span><sub>G</sub>, {C<sup>R</sup><sub>t,τ</sub>, C<sup>LQ</sup><sub>t,τ</sub>}<sub>τ=1</sub><sup>M</sup>)
+        </p>
+        <p>
+          This aggregation produces global persistent LOOM tokens C<sup>G</sup><sub>t</sub> containing both task and action information from all layers, maintaining task intent across all policy layers.
         </p>
         
-        <h3 class="title is-5" style="margin-top: 1.5rem;"><span class="gradient-text">Stage 2: Student Distillation</span></h3>
-        <p>
-          Deploying the teacher directly is impractical since it relies on dense simulator-only references. 
-          We therefore distill it into a student policy π<sub>θ</sub> that operates from sparse SCHEMA commands 
-          and history-conditioned inputs. Following a <strong>DAgger-style procedure</strong>, we iteratively: 
-          (1) roll out the current student in the randomized environment with <strong>random mask</strong> applied to the sparse commands; 
-          (2) query the expert on the visited states to obtain target actions and kinematic quantities; 
-          (3) update the student to minimize an imitation loss combining position-matching, velocity-matching, root orientation matching, and power regularization terms.
+        <h3 class="title is-5" style="margin-top: 1.5rem;"><span class="gradient-text">Integration with Policy Layers</span></h3>
+        <p style="margin-bottom: 1rem;">
+          At each layer τ of the Policy network, the global persistent LOOM tokens C<sup>G</sup><sub>t</sub> is integrated through cross-attention. Crucially, the same persistent global query <span style="font-family: 'Times New Roman', serif; font-style: italic;">Q</span><sub>G</sub> is used across all policy layers, ensuring persistent task intent throughout action generation. This design fundamentally differs from layer-local formulations where each policy layer processes queries independently.
         </p>
+        
+        <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-top: 1rem; border-left: 3px solid #7B68EE;">
+          <h5 class="title is-6" style="margin-bottom: 0.8rem;">
+            <span class="gradient-text">Theoretical Justification</span>
+          </h5>
+          <p style="margin: 0; font-size: 0.95rem; line-height: 1.7;">
+            Persistent global query formulation provides stronger inductive bias for long-horizon instruction following by explicitly maintaining task intent across all layers, unlike layer-local formulations where constraint propagation is implicit and may degrade. This design choice matters primarily in long-horizon tasks, where small representation gaps can compound into failure across multi-stage execution.
+          </p>
+        </div>
         
         <div style="background: var(--background-secondary); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--primary-color); margin-top: 1rem;">
           <h4 class="title is-6" style="margin-bottom: 0.8rem;">
-            <i class="fas fa-graduation-cap"></i> Experimental Setup
+            <i class="fas fa-graduation-cap"></i> Implementation Details
           </h4>
           <ul style="margin-left: 1.5rem;">
-            <li><strong>Robot Platform:</strong> Unitree-style G1 humanoid with 29 actuated DoF</li>
-            <li><strong>Control Frequency:</strong> 50 Hz PD control</li>
-            <li><strong>Training Simulator:</strong> Isaac Lab with contact-rich rigid-body dynamics</li>
-            <li><strong>Evaluation:</strong> Zero-shot transfer to Genesis physics engine</li>
-            <li><strong>Motion Dataset:</strong> AMASS motion corpus covering locomotion, balance, manipulation-style poses, and recovery motions</li>
-            <li><strong>Evaluation Metrics:</strong> Success rate (%), global pose error (E<sub>g-mpjpe</sub>), local pose error (E<sub>mpjpe</sub>)</li>
+            <li><strong>Backbone:</strong> Qwen2.5-0.5B VLM</li>
+            <li><strong>Number of LOOM Query Tokens:</strong> 64</li>
+            <li><strong>Query Dimension:</strong> 512</li>
+            <li><strong>VLM Layers:</strong> 24 layers (all layers used)</li>
+            <li><strong>Training:</strong> End-to-end with LoRA fine-tuning</li>
+            <li><strong>Evaluation Benchmarks:</strong> LIBERO and CALVIN</li>
           </ul>
         </div>
-      </div>
-    </div>
-    
-    <!-- Domain Randomization Strategy -->
-    <div style="margin-top: 3rem;">
-      <h3 class="title is-4 has-text-centered" style="margin-bottom: 2rem;">
-        <span class="gradient-text">Domain Randomization Strategy</span>
-      </h3>
-    <div class="content" style="margin-top: 2rem;">
-        <div class="box" style="background: var(--gradient-primary); padding: 2.5rem; color: white;">
-          <h4 class="title is-5" style="color: white; margin-bottom: 1.5rem;">
-          <i class="fas fa-shield-alt"></i> Bridging the Sim-to-Real Gap
+        
+        <h3 class="title is-5" style="margin-top: 1.5rem;"><span class="gradient-text">Training Settings</span></h3>
+        <div class="table-container" style="overflow-x: auto; margin-top: 1rem;">
+          <table class="table is-fullwidth is-striped" style="font-size: 0.9rem;">
+            <thead>
+              <tr>
+                <th>Setting</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Optimizer</strong></td>
+                <td>AdamW</td>
+              </tr>
+              <tr>
+                <td><strong>Batch size</strong></td>
+                <td>16</td>
+              </tr>
+              <tr>
+                <td><strong>Max training step</strong></td>
+                <td>150,000</td>
+              </tr>
+              <tr>
+                <td><strong>Learning rate</strong></td>
+                <td>1 × 10<sup>-4</sup></td>
+              </tr>
+              <tr>
+                <td><strong>Learning rate schedule</strong></td>
+                <td>Cosine-annealing with warm-up (10%)</td>
+              </tr>
+              <tr>
+                <td><strong>Warmup step</strong></td>
+                <td>10%</td>
+              </tr>
+              <tr>
+                <td><strong>Gradient clipping</strong></td>
+                <td>Max norm 1.0</td>
+              </tr>
+              <tr>
+                <td><strong>Fine-tuning scheme</strong></td>
+                <td>LoRA</td>
+              </tr>
+              <tr>
+                <td><strong>Training hardware</strong></td>
+                <td>4 NVIDIA H100 GPUs (CALVIN) / 1 NVIDIA A100 GPU (LIBERO)</td>
+              </tr>
+              <tr>
+                <td><strong>Training time (LIBERO)</strong></td>
+                <td>~22 hours</td>
+              </tr>
+              <tr>
+                <td><strong>Random seeds</strong></td>
+                <td>3 runs with different seeds (seed 6 for reproducibility)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div style="background: var(--background-secondary); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--primary-color); margin-top: 1.5rem;">
+          <h4 class="title is-6" style="margin-bottom: 0.8rem;">
+            <i class="fas fa-info-circle"></i> Training Procedure
           </h4>
-        <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
-          Our Domain Randomization (DR) strategy is carefully designed to <strong>balance model performance 
-          with diverse domain coverage</strong>, ensuring robust sim-to-sim and potential sim-to-real transfer. 
-          The approach introduces controlled variations across multiple aspects of the simulation environment:
-        </p>
-      </div>
-      
-      <div class="columns is-multiline" style="margin-top: 2rem;">
-        <div class="column is-6">
-            <div class="box" style="height: 100%; border: 2px solid var(--primary-color); background: var(--gradient-box-white);">
-              <h4 class="title is-5 has-text-centered" style="color: var(--primary-color); margin-bottom: 1.5rem;">
-              <i class="fas fa-eye"></i> Observation Randomization
-            </h4>
-            <div style="padding: 1rem;">
-              <div style="background: white; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-                <h5 class="title is-6" style="margin-bottom: 0.5rem;">
-                  <i class="fas fa-wave-square"></i> Sensor Noise
-                </h5>
-                <p>
-                  <strong>Slight observation noise</strong> is added to sensor readings, simulating 
-                  real-world measurement uncertainties while maintaining model accuracy.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="column is-6">
-            <div class="box" style="height: 100%; border: 2px solid var(--primary-dark); background: var(--gradient-box-white);">
-              <h4 class="title is-5 has-text-centered" style="color: var(--primary-dark); margin-bottom: 1.5rem;">
-              <i class="fas fa-cog"></i> Physical Parameter Randomization
-            </h4>
-            <div style="padding: 1rem;">
-              <ul style="list-style: none; padding: 0;">
-                <li style="background: white; padding: 0.8rem; border-radius: 6px; margin-bottom: 0.8rem; box-shadow: 0 2px 6px rgba(0,0,0,0.06);">
-                    <strong><i class="fas fa-weight-hanging" style="color: var(--primary-color);"></i> Body Mass:</strong> 
-                  Randomized within a specified range
-                </li>
-                <li style="background: white; padding: 0.8rem; border-radius: 6px; margin-bottom: 0.8rem; box-shadow: 0 2px 6px rgba(0,0,0,0.06);">
-                    <strong><i class="fas fa-sliders-h" style="color: var(--primary-color);"></i> Joint Stiffness:</strong> 
-                  Varied to simulate different actuator characteristics
-                </li>
-                <li style="background: white; padding: 0.8rem; border-radius: 6px; margin-bottom: 0.8rem; box-shadow: 0 2px 6px rgba(0,0,0,0.06);">
-                    <strong><i class="fas fa-grip-lines" style="color: var(--primary-color);"></i> Friction:</strong> 
-                  Contact friction coefficients randomized
-                </li>
-                <li style="background: white; padding: 0.8rem; border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.06);">
-                    <strong><i class="fas fa-tachometer-alt" style="color: var(--primary-color);"></i> Damping:</strong> 
-                  Joint damping parameters varied
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        
-        <div class="column is-6">
-            <div class="box" style="height: 100%; border: 2px solid var(--primary-color); background: var(--gradient-box-white);">
-              <h4 class="title is-5 has-text-centered" style="color: var(--primary-color); margin-bottom: 1.5rem;">
-              <i class="fas fa-clock"></i> Actuator Latency Simulation
-            </h4>
-            <div style="padding: 1rem;">
-              <div style="background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-                <p style="margin-bottom: 0.8rem;">
-                  To mimic real-world hardware delays, <strong>joint command signals are probabilistically 
-                  delayed by 1-2 control steps</strong>, simulating:
-                </p>
-                <ul style="margin-left: 1.5rem;">
-                  <li>Communication latency</li>
-                  <li>Actuator response time</li>
-                  <li>Controller processing delays</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="column is-6">
-            <div class="box" style="height: 100%; border: 2px solid var(--primary-dark); background: var(--gradient-box-white);">
-              <h4 class="title is-5 has-text-centered" style="color: var(--primary-dark); margin-bottom: 1.5rem;">
-              <i class="fas fa-wind"></i> External Perturbations
-            </h4>
-            <div style="padding: 1rem;">
-              <div style="background: white; padding: 1rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
-                <p style="margin-bottom: 0.8rem;">
-                  <strong>Random external forces</strong> are applied to the robot at random time intervals, 
-                  simulating:
-                </p>
-                <ul style="margin-left: 1.5rem;">
-                  <li>Physical contacts and collisions</li>
-                  <li>Environmental disturbances</li>
-                  <li>Unexpected external interactions</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-        <div class="box" style="background: var(--background-secondary); border-left: 5px solid var(--primary-color); margin-top: 2rem; padding: 1.5rem;">
-        <h4 class="title is-6" style="margin-bottom: 1rem;">
-          <i class="fas fa-lightbulb"></i> Design Philosophy
-        </h4>
-        <p style="font-size: 1.05rem; line-height: 1.8;">
-          Our DR configuration strikes a <strong>careful balance</strong> between two competing objectives: 
-          <strong>(1)</strong> maintaining high task performance in the source domain, and 
-          <strong>(2)</strong> maximizing exposure to diverse input distributions that cover potential target domains. 
-          This balanced approach enables MIRAGE to achieve <strong>robust generalization</strong> across 
-          different simulators and physical conditions, as demonstrated in our sim-to-sim transfer experiments.
-        </p>
-      </div>
-    </div>
-  </div>
-    
-    <!-- Training Pipeline Visualization -->
-    <div style="margin-top: 3rem;">
-      <h3 class="title is-4 has-text-centered" style="margin-bottom: 2rem;">
-        <span class="gradient-text">Training Pipeline</span>
-      </h3>
-    
-    <!-- Stage 1: Teacher Training -->
-    <div class="box" style="margin-bottom: 2rem;">
-      <div class="columns is-vcentered">
-        <div class="column is-two-thirds">
-          <figure class="image">
-            <img src="static/images/teacher_training_stage1.jpg" alt="Teacher Training Stage 1">
-          </figure>
-        </div>
-        <div class="column">
-          <h3 class="title is-4"><span class="gradient-text">Stage 1:</span> Teacher Training</h3>
-            <p>The teacher policy π⋆ is a goal-conditioned reinforcement learning policy trained in simulation under domain-randomized dynamics. It receives dense short-horizon reference motion from AMASS, terrain features, and history-based embeddings, optimized with PPO and GAE to learn robust dense-to-PD control.</p>
-          <ul style="margin-top: 1rem;">
-              <li>Goal-conditioned RL with PPO</li>
-            <li>Domain randomization</li>
-              <li>MIRROR history conditioning</li>
-          </ul>
+          <p style="margin-bottom: 0.8rem;">
+            Training is conducted end-to-end. The persistent global LOOM query <span style="font-family: 'Times New Roman', serif; font-style: italic;">Q</span><sub>G</sub> is initialized randomly and learned from scratch. The persistent global query aggregates vision-language constraints from all VLM layers and maintains task intent across all policy layers. To enable effective gradient flow through all VLM layers, we allow action gradients to backpropagate through the persistent global query to all VLM layers using LoRA fine-tuning, enabling the model to learn better representations for action generation.
+          </p>
+          <p style="margin: 0;">
+            All experiments follow consistent training protocols: same optimizer (AdamW), same learning rate schedule, same batch size, and same number of training steps across all methods for fair comparison.
+          </p>
         </div>
       </div>
     </div>
-
-      <!-- Stage 2: Student Distillation -->
-    <div class="box">
-      <div class="columns is-vcentered">
-        <div class="column">
-            <h3 class="title is-4"><span class="gradient-text">Stage 2:</span> Student Distill</h3>
-            <p>A compact student policy π<sub>θ</sub> is distilled from the expert using DAgger-style online imitation. The student operates directly from SCHEMA-formatted sparse commands with <strong>random mask</strong> and history-conditioned inputs (MIRROR), learning to match the teacher's robust behavior while exposed to its own state distribution.</p>
-          <ul style="margin-top: 1rem;">
-              <li>DAgger-style online distillation</li>
-              <li>SCHEMA sparse command interface with random mask</li>
-              <li>MIRROR history conditioning</li>
-          </ul>
-        </div>
-        <div class="column is-two-thirds">
-          <figure class="image">
-            <img src="static/images/student_training_stage2.jpg" alt="Student Training Stage 2">
-          </figure>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </section>
-<!-- End Training Methodology -->
+<!-- End Methodology -->
 
 <!-- Divider: Experimental Results -->
-<section class="hero is-small" style="background: var(--gradient-primary); padding: 3rem 0;">
+<section class="hero is-small" style="background: linear-gradient(135deg, #9BAEDB 0%, #C7D2EE 25%, #FFD1DC 50%, #EBF7E0 100%); padding: 3rem 0;">
     <div class="container">
     <h1 class="title is-2 has-text-centered has-text-white">
       <i class="fas fa-flask"></i> Experimental Results & Validation
     </h1>
     <p class="subtitle is-4 has-text-centered has-text-white" style="margin-top: 1rem;">
-      Comprehensive evaluation demonstrating MIRAGE's superior performance across diverse scenarios
+      Comprehensive evaluation demonstrating LOOM's superior performance on long-horizon manipulation tasks
     </p>
   </div>
 </section>
 
-<!-- Sim-to-Sim Transfer Comparison -->
+<!-- Experimental Setup -->
 <section class="section is-light">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Sim-to-Sim Transfer Performance Comparison</h2>
-    <div class="content has-text-centered" style="margin-bottom: 2rem;">
-      <p class="is-size-5">
-        Zero-shot transfer performance from IsaacLab (training) to Genesis (unseen domain).
+    <h2 class="title is-3 has-text-centered">Experimental Setup</h2>
+    <div class="content" style="margin-top: 2rem;">
+      <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 2rem;">
+        We evaluate LOOM on multiple benchmarks to answer: What design assumptions in query-based VLA architectures limit long-horizon instruction following, and how does persistent global LOOM query improve performance? We compare against baseline methods including VLA-Adapter-Pro, OpenVLA-OFT, and other state-of-the-art approaches.
       </p>
     </div>
     
-    <!-- Performance Table -->
+    <h3 class="title is-4 has-text-centered" style="margin-top: 2rem;">Evaluation Benchmarks</h3>
+    <div class="columns is-multiline" style="margin-top: 2rem;">
+      <div class="column is-6">
+        <div class="box" style="height: 100%; background: white; padding: 1.5rem; border-left: 4px solid #9BAEDB;">
+          <h4 class="title is-5" style="margin-bottom: 1rem;">
+            <span class="icon-text">
+              <span class="icon" style="color: #9BAEDB;"><i class="fas fa-robot"></i></span>
+              <span>LIBERO</span>
+            </span>
+          </h4>
+          <p style="line-height: 1.7;">
+            LIBERO consists of four suites: (1) <strong>Spatial</strong>: tasks requiring spatial reasoning (e.g., "move object to the left"), (2) <strong>Object</strong>: object manipulation tasks (e.g., "pick up cup"), (3) <strong>Goal</strong>: goal-conditioned tasks, and (4) <strong>Long</strong>: long-horizon tasks with 5-10 steps. LIBERO-Long is particularly challenging as it requires maintaining object relationships across multiple manipulation steps.
+          </p>
+        </div>
+      </div>
+      
+      <div class="column is-6">
+        <div class="box" style="height: 100%; background: white; padding: 1.5rem; border-left: 4px solid #7B68EE;">
+          <h4 class="title is-5" style="margin-bottom: 1rem;">
+            <span class="icon-text">
+              <span class="icon" style="color: #7B68EE;"><i class="fas fa-tasks"></i></span>
+              <span>CALVIN ABC→D</span>
+            </span>
+          </h4>
+          <p style="line-height: 1.7;">
+            CALVIN ABC→D evaluates zero-shot generalization by training on environments A, B, and C, then testing on environment D. VLA needs to execute a preset sequence of 1,000 tasks in sequence. Each task row consists of five subtasks. The model can only proceed to the next subtask after completing the current one. This benchmark tests the model's ability to maintain task intent across extended execution horizons.
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="box" style="background: white; padding: 1.5rem; border-radius: 8px; margin-top: 2rem; border-left: 3px solid #9BAEDB;">
+      <h4 class="title is-6" style="margin-bottom: 1rem;">
+        <span class="gradient-text">Training Objective</span>
+      </h4>
+      <p style="margin: 0; line-height: 1.7;">
+        We use <strong>L1 loss</strong> between predicted and ground-truth actions for training. All experiments follow consistent training protocols: same optimizer (AdamW), same learning rate schedule, same batch size, and same number of training steps across all methods for fair comparison.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Main Results -->
+<section class="section is-light">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Main Results</h2>
+    <div class="content has-text-centered" style="margin-bottom: 2rem;">
+      <p class="is-size-5">
+        Performance evaluation on LIBERO and CALVIN benchmarks, demonstrating LOOM's superior performance on long-horizon manipulation tasks.
+      </p>
+    </div>
+    
+    <!-- LIBERO Performance Table -->
     <div class="box" style="margin-bottom: 2rem; background: var(--background-secondary);">
-      <h4 class="title is-5 has-text-centered" style="margin-bottom: 1.5rem;">Overall Performance Comparison</h4>
+      <h4 class="title is-5 has-text-centered" style="margin-bottom: 1.5rem;">LIBERO Benchmark Results</h4>
       <p class="has-text-centered" style="margin-bottom: 1rem; font-size: 0.9rem; color: #666;">
-        Genesis results are evaluated in a zero-shot manner without collecting test-domain data for retraining. 
-        Best results are <strong class="gradient-text">bold</strong>; second-best are <u>underlined</u>.
+        Success rates (%) are reported. <strong class="gradient-text">Bold*</strong> is the best performance, <strong>Bold</strong> is the suboptimal performance, and <em>Italics</em> is the third best performance. ``Params'' is the backbone scale (Billion).
       </p>
       <div class="table-container" style="overflow-x: auto;">
-        <table class="table is-fullwidth is-striped" style="font-size: 0.85rem;">
+        <table class="table is-fullwidth is-striped" style="font-size: 0.9rem;">
           <thead>
             <tr>
-              <th rowspan="2">Method</th>
-              <th colspan="3">IsaacLab</th>
-              <th colspan="3">IsaacLab + DR</th>
-              <th colspan="3">Genesis</th>
-              <th colspan="3">Genesis + DR</th>
-            </tr>
-            <tr>
-              <th>Succ.<br>(%)↑</th>
-              <th>E<sub>g-mpjpe</sub><br>(mm)↓</th>
-              <th>E<sub>mpjpe</sub><br>(mm)↓</th>
-              <th>Succ.<br>(%)↑</th>
-              <th>E<sub>g-mpjpe</sub><br>(mm)↓</th>
-              <th>E<sub>mpjpe</sub><br>(mm)↓</th>
-              <th>Succ.<br>(%)↑</th>
-              <th>E<sub>g-mpjpe</sub><br>(mm)↓</th>
-              <th>E<sub>mpjpe</sub><br>(mm)↓</th>
-              <th>Succ.<br>(%)↑</th>
-              <th>E<sub>g-mpjpe</sub><br>(mm)↓</th>
-              <th>E<sub>mpjpe</sub><br>(mm)↓</th>
+              <th>Method</th>
+              <th>Params</th>
+              <th>Spatial</th>
+              <th>Object</th>
+              <th>Goal</th>
+              <th>Long</th>
+              <th>Avg</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td><strong>MaskedMimic</strong></td>
-              <td>32.1</td>
-              <td>376</td>
-              <td>182</td>
-              <td>&lt;10</td>
-              <td>713</td>
-              <td>283</td>
-              <td>&lt;10</td>
-              <td>742</td>
-              <td>322</td>
-              <td>&lt;10</td>
-              <td>738</td>
-              <td>326</td>
+              <td><strong>OpenVLA-OFT</strong></td>
+              <td>7</td>
+              <td><em>97.6</em></td>
+              <td>98.4</td>
+              <td><em>97.9</em></td>
+              <td><em>94.5</em></td>
+              <td><em>97.1</em></td>
             </tr>
             <tr>
-              <td><strong>OmniH2O</strong></td>
+              <td><strong>π<sub>0</sub></strong></td>
+              <td>3</td>
+              <td>96.8</td>
+              <td><em>98.8</em></td>
+              <td>95.8</td>
               <td>85.2</td>
-              <td>266</td>
-              <td>132</td>
-              <td>83.2</td>
-              <td>282</td>
-              <td>168</td>
-              <td>72.3</td>
-              <td>312</td>
-              <td>165</td>
-              <td><u>70.2</u></td>
-              <td><u>335</u></td>
-              <td><u>191</u></td>
+              <td>94.1</td>
             </tr>
             <tr>
-              <td><strong>ExBody2</strong></td>
-              <td><u>86.6</u></td>
-              <td><u>247</u></td>
-              <td><u>108</u></td>
-              <td><u>85.9</u></td>
-              <td><u>237</u></td>
-              <td><u>128</u></td>
-              <td><u>73.1</u></td>
-              <td><u>305</u></td>
-              <td><u>157</u></td>
-              <td>69.4</td>
-              <td>342</td>
-              <td>202</td>
-            </tr>
-            <tr>
-              <td><strong>Hover</strong></td>
-              <td>71.2</td>
-              <td>278</td>
-              <td>138</td>
-              <td>67.9</td>
-              <td>375</td>
-              <td>196</td>
-              <td>16.2</td>
-              <td>722</td>
-              <td>258</td>
-              <td>15.5</td>
-              <td>746</td>
-              <td>282</td>
+              <td><strong>VLA-Adapter-Pro</strong></td>
+              <td>0.5</td>
+              <td><strong>99.6*</strong></td>
+              <td><strong>99.6*</strong></td>
+              <td><strong>98.2*</strong></td>
+              <td><strong>96.4</strong></td>
+              <td><strong>98.5*</strong></td>
             </tr>
             <tr style="background: var(--gradient-primary-medium); font-weight: bold;">
-              <td><strong class="gradient-text">MIRAGE (Ours)</strong></td>
-              <td><strong class="gradient-text">90.7</strong></td>
-              <td><strong class="gradient-text">102</strong></td>
-              <td><strong class="gradient-text">76</strong></td>
-              <td><strong class="gradient-text">88.4</strong></td>
-              <td><strong class="gradient-text">124</strong></td>
-              <td><strong class="gradient-text">87</strong></td>
-              <td><strong class="gradient-text">86.0</strong></td>
-              <td><strong class="gradient-text">162</strong></td>
-              <td><strong class="gradient-text">96</strong></td>
-              <td><strong class="gradient-text">84.4</strong></td>
-              <td><strong class="gradient-text">171</strong></td>
-              <td><strong class="gradient-text">108</strong></td>
+              <td><strong class="gradient-text">LOOM (Ours)</strong></td>
+              <td>0.5</td>
+              <td><strong>98.5</strong></td>
+              <td><strong>99.5</strong></td>
+              <td><strong>98.0</strong></td>
+              <td><strong class="gradient-text">97.5*</strong></td>
+              <td><strong>98.4</strong></td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
     
-    <div class="columns is-multiline">
-      <div class="column is-4">
-        <div class="box" style="height: 100%;">
-          <h3 class="title is-5 has-text-centered" style="margin-bottom: 1rem; min-height: 3.5rem; display: flex; align-items: center; justify-content: center;">
-            <span><strong>MaskedMimic</strong><br>32.1% → &lt;10%</span>
-          </h3>
-          <video controls style="width: 100%; border-radius: 8px;">
-            <source src="static/videos/g1_no_DR_fall_down.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-          <p class="has-text-grey" style="margin-top: 1rem;">
-            <strong>Catastrophic Failure:</strong> Performs poorly even in the training environment (32.1% success), 
-            achieving only &lt;10% success in Genesis. This reflects its design focus on animation-quality motion 
-            synthesis rather than PD control execution on complex humanoid platforms.
-          </p>
-        </div>
+    <!-- CALVIN Performance Table -->
+    <div class="box" style="margin-bottom: 2rem; background: var(--background-secondary);">
+      <h4 class="title is-5 has-text-centered" style="margin-bottom: 1.5rem;">CALVIN ABC→D Results</h4>
+      <p class="has-text-centered" style="margin-bottom: 1rem; font-size: 0.9rem; color: #666;">
+        ``5 tasks'' refers to completing 5 tasks in a row (%). <strong class="gradient-text">Bold*</strong> is the best performance, <strong>Bold</strong> is the suboptimal performance, and <em>Italics</em> is the third best performance. ``Params'' is the backbone scale (Billion).
+      </p>
+      <div class="table-container" style="overflow-x: auto;">
+        <table class="table is-fullwidth is-striped" style="font-size: 0.9rem;">
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Params</th>
+              <th>5 tasks</th>
+              <th>Avg. len</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>OpenVLA-OFT</strong></td>
+              <td>7</td>
+              <td><em>66.5</em></td>
+              <td><em>4.10</em></td>
+            </tr>
+            <tr>
+              <td><strong>VPP</strong></td>
+              <td>1.5</td>
+              <td><strong>75.0</strong></td>
+              <td><strong>4.33</strong></td>
+            </tr>
+            <tr>
+              <td><strong>VLA-Adapter-Pro</strong></td>
+              <td>0.5</td>
+              <td><strong>76.5</strong></td>
+              <td><strong>4.42</strong></td>
+            </tr>
+            <tr style="background: var(--gradient-primary-medium); font-weight: bold;">
+              <td><strong class="gradient-text">LOOM (Ours)</strong></td>
+              <td>0.5</td>
+              <td><strong class="gradient-text">82.0*</strong></td>
+              <td><strong class="gradient-text">4.65*</strong></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      
-      <div class="column is-4">
-        <div class="box" style="height: 100%;">
-          <h3 class="title is-5 has-text-centered" style="margin-bottom: 1rem; min-height: 3.5rem; display: flex; align-items: center; justify-content: center;">
-            <span><strong>ExBody2</strong><br>86.6% → 73.1%</span>
-          </h3>
-          <video controls style="width: 100%; border-radius: 8px;">
-            <source src="static/videos/maskedmimic_sim2sim_vs_mirage.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-          <p class="has-text-grey" style="margin-top: 1rem;">
-            <strong>Moderate Transfer:</strong> Achieves reasonable performance in IsaacLab (86.6%) but suffers 
-            substantial degradation in Genesis (73.1%), with tracking errors increasing from 247mm to 305mm. 
-            This suggests limited sim-to-sim robustness.
-          </p>
-        </div>
+    </div>
+    
+    <!-- Efficiency Comparison Table -->
+    <div class="box" style="margin-bottom: 2rem; background: var(--background-secondary);">
+      <h4 class="title is-5 has-text-centered" style="margin-bottom: 1.5rem;">Inference Efficiency Comparison</h4>
+      <p class="has-text-centered" style="margin-bottom: 1rem; font-size: 0.9rem; color: #666;">
+        Throughput (Hz) ↑ indicates higher is better, Latency (Sec) ↓ indicates lower is better. LOOM maintains high inference speed with minimal computational overhead.
+      </p>
+      <div class="table-container" style="overflow-x: auto;">
+        <table class="table is-fullwidth is-striped" style="font-size: 0.9rem;">
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Params (M)</th>
+              <th>Throughput (Hz) ↑</th>
+              <th>Latency (Sec) ↓</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>OpenVLA</strong></td>
+              <td>7,000</td>
+              <td>4.2</td>
+              <td>0.2396</td>
+            </tr>
+            <tr>
+              <td><strong>OpenVLA-OFT (wo X<sub>g</sub><sup>t</sup>, P)</strong></td>
+              <td>7,000</td>
+              <td>109.7</td>
+              <td>0.0729</td>
+            </tr>
+            <tr>
+              <td><strong>OpenVLA-OFT</strong></td>
+              <td>7,000</td>
+              <td>71.4</td>
+              <td>0.1120</td>
+            </tr>
+            <tr>
+              <td><strong>VLA-Adapter-Pro</strong></td>
+              <td>97</td>
+              <td>219.2</td>
+              <td>0.0046</td>
+            </tr>
+            <tr style="background: var(--gradient-primary-medium); font-weight: bold;">
+              <td><strong class="gradient-text">LOOM (Ours)</strong></td>
+              <td>99.1</td>
+              <td><strong>215.8</strong></td>
+              <td><strong>0.0046</strong></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      
-      <div class="column is-4">
-        <div class="box" style="height: 100%;">
-          <h3 class="title is-5 has-text-centered" style="margin-bottom: 1rem; min-height: 3.5rem; display: flex; align-items: center; justify-content: center;">
-            <span><strong class="gradient-text">MIRAGE</strong><br>90.7% → 86.0%</span>
-          </h3>
-          <video controls style="width: 100%; border-radius: 8px;">
-            <source src="static/videos/genesis_g1_walk.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-          <p class="has-text-grey" style="margin-top: 1rem;">
-            <strong>Superior Transfer:</strong> Achieves 90.7% success in IsaacLab and maintains 86.0% in zero-shot 
-            Genesis transfer, with only modest error increase (102mm → 162mm). MIRROR's historical memory enables 
-            domain-aware adaptation, allowing the policy to sense Genesis-specific dynamics and adjust accordingly.
-          </p>
-        </div>
+      <div style="background: var(--background-secondary); padding: 1rem; border-radius: 6px; margin-top: 1rem; border-left: 3px solid var(--primary-dark);">
+        <p style="margin: 0; font-size: 0.95rem;">
+          <strong>💡 Key Finding:</strong> LOOM maintains high computational efficiency despite the paradigm shift. The persistent global query adds only <strong>2.1M parameters</strong>, and inference throughput remains high at <strong>215.8 Hz</strong> (compared to VLA-Adapter-Pro's 219.2 Hz), demonstrating minimal computational overhead while maintaining task intent throughout action generation.
+        </p>
+      </div>
+    </div>
+    
+    <!-- LIBERO Full Results Table -->
+    <div class="box" style="margin-bottom: 2rem; background: var(--background-secondary);">
+      <h4 class="title is-5 has-text-centered" style="margin-bottom: 1.5rem;">LIBERO Complete Results</h4>
+      <p class="has-text-centered" style="margin-bottom: 1rem; font-size: 0.9rem; color: #666;">
+        Complete comparison on LIBERO benchmark including all baseline methods across Large, Small, and Tiny scales. Success rates (%) are reported. <strong class="gradient-text">Bold*</strong> is the best performance, <strong>Bold</strong> is the suboptimal performance, and <em>Italics</em> is the third best performance.
+      </p>
+      <div class="table-container" style="overflow-x: auto;">
+        <table class="table is-fullwidth is-striped" style="font-size: 0.85rem;">
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Params</th>
+              <th>Spatial</th>
+              <th>Object</th>
+              <th>Goal</th>
+              <th>Long</th>
+              <th>Avg</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background: rgba(155, 174, 219, 0.1);">
+              <td colspan="7" style="font-weight: bold; text-align: center;"><em>Large</em></td>
+            </tr>
+            <tr>
+              <td>FlowVLA</td>
+              <td>8.5</td>
+              <td>93.2</td>
+              <td>95.0</td>
+              <td>91.6</td>
+              <td>72.6</td>
+              <td>88.1</td>
+            </tr>
+            <tr>
+              <td>UnifiedVLA</td>
+              <td>8.5</td>
+              <td>95.4</td>
+              <td>98.8</td>
+              <td>93.6</td>
+              <td>94.0</td>
+              <td>95.5</td>
+            </tr>
+            <tr>
+              <td>OpenVLA</td>
+              <td>7</td>
+              <td>84.7</td>
+              <td>88.4</td>
+              <td>79.2</td>
+              <td>53.7</td>
+              <td>76.5</td>
+            </tr>
+            <tr>
+              <td>OpenVLA-OFT</td>
+              <td>7</td>
+              <td><em>97.6</em></td>
+              <td>98.4</td>
+              <td><em>97.9</em></td>
+              <td>94.5</td>
+              <td><em>97.1</em></td>
+            </tr>
+            <tr>
+              <td>UniVLA</td>
+              <td>7</td>
+              <td>96.5</td>
+              <td>96.8</td>
+              <td>95.6</td>
+              <td>92.0</td>
+              <td>95.2</td>
+            </tr>
+            <tr>
+              <td>PD-VLA</td>
+              <td>7</td>
+              <td>95.5</td>
+              <td>96.7</td>
+              <td>94.9</td>
+              <td>91.7</td>
+              <td>94.7</td>
+            </tr>
+            <tr style="background: rgba(155, 174, 219, 0.1);">
+              <td colspan="7" style="font-weight: bold; text-align: center;"><em>Small</em></td>
+            </tr>
+            <tr>
+              <td>π<sub>0</sub></td>
+              <td>3</td>
+              <td>96.8</td>
+              <td><em>98.8</em></td>
+              <td>95.8</td>
+              <td>85.2</td>
+              <td>94.1</td>
+            </tr>
+            <tr>
+              <td>4D-VLA</td>
+              <td>4</td>
+              <td>88.9</td>
+              <td>95.2</td>
+              <td>90.9</td>
+              <td>79.1</td>
+              <td>88.5</td>
+            </tr>
+            <tr>
+              <td>GR00T N1</td>
+              <td>2</td>
+              <td>94.4</td>
+              <td>97.6</td>
+              <td>93.0</td>
+              <td>90.6</td>
+              <td>93.9</td>
+            </tr>
+            <tr style="background: rgba(155, 174, 219, 0.1);">
+              <td colspan="7" style="font-weight: bold; text-align: center;"><em>Tiny</em></td>
+            </tr>
+            <tr>
+              <td>VLA-Adapter-Pro</td>
+              <td>0.5</td>
+              <td><strong>99.6*</strong></td>
+              <td><strong>99.6*</strong></td>
+              <td><strong>98.2*</strong></td>
+              <td><strong>96.4</strong></td>
+              <td><strong>98.5*</strong></td>
+            </tr>
+            <tr style="background: var(--gradient-primary-medium); font-weight: bold;">
+              <td><strong class="gradient-text">LOOM (Ours)</strong></td>
+              <td>0.5</td>
+              <td><strong>98.5</strong></td>
+              <td><strong>99.5</strong></td>
+              <td><strong>98.0</strong></td>
+              <td><strong class="gradient-text">97.5*</strong></td>
+              <td><strong>98.4</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <!-- CALVIN Detailed Results Table -->
+    <div class="box" style="margin-bottom: 2rem; background: var(--background-secondary);">
+      <h4 class="title is-5 has-text-centered" style="margin-bottom: 1.5rem;">CALVIN ABC→D Detailed Results</h4>
+      <p class="has-text-centered" style="margin-bottom: 1rem; font-size: 0.9rem; color: #666;">
+        Detailed comparison on CALVIN ABC→D showing task completion rates from 1 to 5 tasks in a row. <strong class="gradient-text">Bold*</strong> is the best performance. ``Avg. len'' is the average sequence length.
+      </p>
+      <div class="table-container" style="overflow-x: auto;">
+        <table class="table is-fullwidth is-striped" style="font-size: 0.85rem;">
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Params</th>
+              <th>1</th>
+              <th>2</th>
+              <th>3</th>
+              <th>4</th>
+              <th>5</th>
+              <th>Avg. len</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background: rgba(155, 174, 219, 0.1);">
+              <td colspan="8" style="font-weight: bold; text-align: center;"><em>Large</em></td>
+            </tr>
+            <tr>
+              <td>OpenVLA-OFT</td>
+              <td>7</td>
+              <td>96.3</td>
+              <td>89.1</td>
+              <td>82.4</td>
+              <td>75.8</td>
+              <td><em>66.5</em></td>
+              <td><em>4.10</em></td>
+            </tr>
+            <tr>
+              <td>UniVLA</td>
+              <td>7</td>
+              <td>95.5</td>
+              <td>85.8</td>
+              <td>75.4</td>
+              <td>66.9</td>
+              <td>56.5</td>
+              <td>3.80</td>
+            </tr>
+            <tr style="background: rgba(155, 174, 219, 0.1);">
+              <td colspan="8" style="font-weight: bold; text-align: center;"><em>Small</em></td>
+            </tr>
+            <tr>
+              <td>VPP</td>
+              <td>1.5</td>
+              <td>95.7</td>
+              <td>91.2</td>
+              <td>86.3</td>
+              <td>81.0</td>
+              <td><strong>75.0</strong></td>
+              <td><strong>4.33</strong></td>
+            </tr>
+            <tr style="background: rgba(155, 174, 219, 0.1);">
+              <td colspan="8" style="font-weight: bold; text-align: center;"><em>Tiny</em></td>
+            </tr>
+            <tr>
+              <td>VLA-Adapter-Pro</td>
+              <td>0.5</td>
+              <td>99.1</td>
+              <td>94.6</td>
+              <td>88.8</td>
+              <td>82.8</td>
+              <td><strong>76.5</strong></td>
+              <td><strong>4.42</strong></td>
+            </tr>
+            <tr>
+              <td>Seer</td>
+              <td>0.57</td>
+              <td>96.3</td>
+              <td>91.6</td>
+              <td>86.1</td>
+              <td>80.3</td>
+              <td>74.0</td>
+              <td>4.28</td>
+            </tr>
+            <tr style="background: var(--gradient-primary-medium); font-weight: bold;">
+              <td><strong class="gradient-text">LOOM (Ours)</strong></td>
+              <td>0.5</td>
+              <td><strong>99.3*</strong></td>
+              <td><strong>96.0*</strong></td>
+              <td><strong>91.0*</strong></td>
+              <td><strong class="gradient-text">86.5*</strong></td>
+              <td><strong class="gradient-text">82.0*</strong></td>
+              <td><strong class="gradient-text">4.65*</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="background: var(--background-secondary); padding: 1rem; border-radius: 6px; margin-top: 1rem; border-left: 3px solid var(--primary-dark);">
+        <p style="margin: 0; font-size: 0.95rem;">
+          <strong>💡 Key Finding:</strong> Persistent global LOOM query formulation significantly improves long-horizon sequential task completion on CALVIN. LOOM achieves <strong>82.0%</strong> for completing 5 tasks in a row, outperforming VLA-Adapter-Pro (<strong>76.5%</strong>) by <strong>+5.5%</strong>. The improvement is particularly notable in longer sequences (4-5 tasks), demonstrating that maintaining task intent across extended horizons is essential for zero-shot generalization in long-horizon tasks.
+        </p>
       </div>
     </div>
     
     <!-- Key Insight Box -->
-    <div class="box" style="background: var(--gradient-primary); color: white; margin-top: 3rem; padding: 2rem;">
-      <h4 class="title is-5" style="color: white; margin-bottom: 1rem;">
-        <i class="fas fa-lightbulb"></i> Why Does MIRROR Make the Difference?
+    <div class="box" style="background: linear-gradient(135deg, #FFD1DC 0%, #E0BBE4 25%, #EBF7E0 50%, #FFFACD 100%); border-left: 4px solid #7B68EE; margin-top: 3rem; padding: 2rem; box-shadow: var(--shadow-md);">
+      <h4 class="title is-5" style="color: var(--text-primary); margin-bottom: 1rem;">
+        <i class="fas fa-lightbulb" style="color: #7B68EE;"></i> Why Does Persistent Global LOOM Query Make the Difference?
       </h4>
-      <p style="font-size: 1.05rem; line-height: 1.8;">
-        MIRROR's action-state history provides the robot with <strong>"proprioceptive intuition"</strong> — 
-        the ability to sense its own historical states and actions. Without this memory, models trained 
-        under DR must use a <em>single fixed policy</em> that attempts to work across all domains but cannot 
-        perceive domain-specific characteristics. While this prevents complete failure (as seen in ExBody2 and OmniH2O), 
-        it sacrifices optimal performance by lacking the ability to identify the current domain and adapt 
-        its strategy accordingly. In contrast, MIRROR enables <strong>domain-aware adaptation</strong>, 
-        allowing the policy to switch to the optimal strategy for each specific domain, achieving strong 
-        zero-shot sim-to-sim transfer without any target-domain fine-tuning.
+      <p style="font-size: 1.05rem; line-height: 1.8; color: var(--text-primary);">
+        The persistent global LOOM query paradigm maintains task intent across all policy layers, fundamentally changing how queries function in VLA architectures. Unlike layer-local formulations where each policy layer processes queries independently, LOOM's persistent global formulation aggregates and maintains vision-language constraints from all VLM layers as a stable structure throughout action generation. This provides a stronger inductive bias for sustaining instruction-following behavior over extended horizons, addressing the fundamental limitation in layer-local query fusion paradigms that implicitly bottleneck constraint propagation in long-horizon tasks. The improvement is particularly notable in long-horizon tasks, where small representation gaps can compound into failure across multi-stage execution.
       </p>
     </div>
   </div>
 </section>
-<!-- End Sim-to-Sim Transfer Comparison -->
+<!-- End Main Results -->
 
 <!-- Ablation Studies -->
 <section class="section">
@@ -775,52 +1124,57 @@
       <i class="fas fa-flask"></i> Ablation Studies
     </h2>
     <div class="content" style="margin-top: 2rem;">
-      <div class="box" style="background: var(--gradient-box-light); padding: 2rem; border-left: 5px solid var(--primary-color);">
+      <div class="box" style="background: linear-gradient(135deg, rgba(245, 240, 247, 0.5) 0%, rgba(255, 245, 247, 0.5) 50%, rgba(245, 255, 245, 0.5) 100%); padding: 2rem; border-left: 5px solid #9BAEDB; border-radius: 8px;">
         <h3 class="title is-5" style="margin-bottom: 1.5rem;">
           <span class="gradient-text">Component Analysis</span>
         </h3>
         <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
-          We conduct ablation studies to analyze the contribution of domain randomization (DR) and the MIRROR module 
-          under both training and zero-shot testing conditions. The results demonstrate that both components play 
-          complementary roles for MIRAGE to achieve robust PD control under cross-domain and perturbed settings.
+          We conduct systematic ablation studies on LIBERO-Long to analyze the impact of different design choices, including the complementarity of Raw and LOOM Query features, the number of LOOM query tokens, and layer-wise performance analysis.
         </p>
         
         <div class="box" style="background: white; padding: 1.5rem; border-radius: 8px; margin-top: 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
           <h4 class="title is-6" style="margin-bottom: 1rem;">
-            <i class="fas fa-chart-bar"></i> Ablation Results
+            <i class="fas fa-chart-bar"></i> Feature Combination Ablation
           </h4>
           <div class="table-container" style="overflow-x: auto; margin-top: 1rem;">
             <table class="table is-fullwidth is-striped" style="font-size: 0.9rem;">
               <thead>
                 <tr>
-                  <th>Method</th>
-                  <th>IsaacLab<br>Succ. (%)</th>
-                  <th>IsaacLab + DR<br>Succ. (%)</th>
-                  <th>Genesis<br>Succ. (%)</th>
-                  <th>Genesis + DR<br>Succ. (%)</th>
+                  <th>Configuration</th>
+                  <th>Global LQ</th>
+                  <th>Local LQ</th>
+                  <th>Raw VL</th>
+                  <th>SR (%) ↑</th>
                 </tr>
               </thead>
               <tbody>
+                <tr>
+                  <td><strong>Local LQ only</strong></td>
+                  <td>×</td>
+                  <td>✓</td>
+                  <td>×</td>
+                  <td>95.0</td>
+                </tr>
+                <tr>
+                  <td><strong>Global LQ only</strong></td>
+                  <td>✓</td>
+                  <td>×</td>
+                  <td>×</td>
+                  <td>96.0</td>
+                </tr>
+                <tr>
+                  <td><strong>Local LQ + Raw VL</strong></td>
+                  <td>×</td>
+                  <td>✓</td>
+                  <td>✓</td>
+                  <td><em>96.8</em></td>
+                </tr>
                 <tr style="background: var(--gradient-primary-medium); font-weight: bold;">
-                  <td><strong class="gradient-text">MIRAGE</strong></td>
-                  <td><strong>90.7</strong></td>
-                  <td><strong>88.4</strong></td>
-                  <td><strong>86.0</strong></td>
-                  <td><strong>84.4</strong></td>
-                </tr>
-                <tr>
-                  <td><strong>MIRAGE w/o DR</strong></td>
-                  <td>79.8</td>
-                  <td>&lt;10</td>
-                  <td>&lt;10</td>
-                  <td>&lt;10</td>
-                </tr>
-                <tr>
-                  <td><strong>MIRAGE w/o MIRROR</strong></td>
-                  <td>91.3</td>
-                  <td>70.5</td>
-                  <td>&lt;10</td>
-                  <td>&lt;10</td>
+                  <td><strong class="gradient-text">Global LQ + Raw VL</strong></td>
+                  <td>✓</td>
+                  <td>×</td>
+                  <td>✓</td>
+                  <td><strong class="gradient-text">97.5*</strong></td>
                 </tr>
               </tbody>
             </table>
@@ -828,33 +1182,27 @@
           
           <div style="background: var(--background-secondary); padding: 1rem; border-radius: 6px; margin-top: 1rem; border-left: 3px solid var(--primary-dark);">
             <p style="margin: 0; font-size: 0.95rem;">
-              <strong>💡 Key Findings:</strong> (1) Removing domain randomization leads to severe performance collapse 
-              once test-time perturbations or simulator changes are introduced, confirming DR is essential for robust 
-              generalization. (2) Removing MIRROR causes a different failure pattern: performance remains competitive 
-              in the training environment (91.3% vs. 90.7%) but degrades sharply under domain shifts, highlighting MIRROR's role as an 
-              implicit dynamics memory that allows online adaptation to latent changes in simulator parameters. 
-              (3) In the fixed IsaacLab environment, MIRAGE w/o MIRROR achieves slightly higher success (91.3% vs. 90.7%) 
-              because without the memory factor, more model capacity can focus on processing other inputs (e.g., future frames). 
-              With MIRROR, the per-frame varying memory tokens act as additional noise-like inputs, requiring a larger proportion 
-              of model weights to transform dynamic memory factors into fixed "proprioceptive" representations. However, MIRROR 
-              is designed to address domain shift problems, and in a fixed, known domain, this mechanism does not provide an advantage 
-              and may slightly reduce performance by allocating capacity to unnecessary adaptation mechanisms.
+              <strong>💡 Key Findings:</strong> (1) Raw latents and LOOM Query features provide complementary information for action generation. (2) Persistent global conditioning extracts the most benefit from their combination, outperforming layer-local formulations. (3) The persistent global LOOM query formulation achieves 97.5% success rate on LIBERO-Long, demonstrating the advantage of maintaining task intent across all policy layers.
             </p>
           </div>
         </div>
       </div>
     </div>
     
-    <!-- Ablation Training Curves -->
+    <!-- Layer-wise Performance Analysis -->
     <div style="margin-top: 3rem;">
       <h3 class="title is-4 has-text-centered" style="margin-bottom: 2rem;">
-        <span class="gradient-text">Ablation Training Curves Comparison</span>
+        <span class="gradient-text">Layer-wise Performance Analysis</span>
       </h3>
     <div class="content has-text-justified" style="margin-top: 2rem; margin-bottom: 2rem;">
       <p style="font-size: 1.05rem; line-height: 1.8;">
-        Training curves comparing <span class="gradient-text">MIRAGE</span> with ablation variants across different metrics. 
-        The curves demonstrate the contribution of each component (domain randomization and MIRROR) to the overall performance 
-        and training stability of the framework.
+        Comparison of different query formulations across VLM layers. For single-layer variants, the best-performing Raw latent comes from a middle VLM layer (layer 13, 88.3%), while the best-performing additional query latent comes from a deep layer (layer 24, 91.0%). This difference arises because middle-layer Raw features better balance low-level visual detail and high-level semantics for action generation, whereas deep-layer additional query features, trained from scratch, aggregate richer multimodal details that more directly support action prediction.
+      </p>
+      <p style="font-size: 1.05rem; line-height: 1.8; margin-top: 1rem;">
+        Multi-layer formulations improve performance: all-layer additional queries (layer-local) achieves 92.6%, outperforming all-layer Raw (90.6%), and persistent global LOOM query (97.5%) outperforms all layer-local formulations, confirming that maintaining task intent across all policy layers is essential for long-horizon task performance. For baseline methods, "All-layer Raw" uses each VLM layer's raw latent independently as KV for the corresponding policy layer, while "All-layer additional queries (layer-local)" uses each VLM layer's additional queries independently as KV for the corresponding policy layer. In contrast, LOOM first concatenates task tokens and action tokens within each VLM layer, then concatenates these representations from all VLM layers to form a persistent KV shared across all policy layers.
+      </p>
+      <p style="font-size: 1.05rem; line-height: 1.8; margin-top: 1rem; font-style: italic; color: #666;">
+        Using all-layer features not only yields better performance but also avoids manual layer selection, making the design more universal.
       </p>
     </div>
     
@@ -862,365 +1210,239 @@
       <div class="column">
         <div class="content has-text-centered">
           <figure class="image">
-            <img src="static/images/method_comparison.png" alt="Ablation Training Curves - Method Comparison">
+            <img src="static/images/four_conditions.png" alt="Layer-wise Performance Analysis">
           </figure>
           <p class="has-text-grey" style="margin-top: 1rem;">
-            Training curves comparing MIRAGE with ablation variants (w/o DR, w/o MIRROR) across different performance metrics.
+            Ablation study comparing different query formulations on LIBERO-Long. Left: single-layer formulations (Raw latent and additional query latent) across different VLM layers. Right: all-layer formulations (all-layer Raw, all-layer additional queries layer-local, and persistent global). Persistent global LOOM query (97.5%) outperforms all layer-local formulations.
           </p>
         </div>
       </div>
     </div>
     
-    <div class="columns is-centered" style="margin-top: 3rem;">
-      <div class="column">
-        <div class="content has-text-centered">
-          <figure class="image">
-            <img src="static/images/metrics_comparison1.png" alt="Ablation Training Curves - Metrics Comparison">
-          </figure>
-          <p class="has-text-grey" style="margin-top: 1rem;">
-            Detailed metrics comparison showing the impact of domain randomization and MIRROR on training dynamics and final performance.
-          </p>
-  </div>
-      </div>
-    </div>
-    
-    <!-- Ablation Results on Genesis Test Dataset -->
+    <!-- Number of LOOM Query Tokens -->
     <div style="margin-top: 3rem;">
       <h3 class="title is-4 has-text-centered" style="margin-bottom: 2rem;">
-        <span class="gradient-text">Ablation Results on Genesis Test Dataset</span>
+        <span class="gradient-text">Number of LOOM Query Tokens</span>
       </h3>
+    <div class="content has-text-justified" style="margin-top: 2rem; margin-bottom: 2rem;">
+      <p style="font-size: 1.05rem; line-height: 1.8;">
+        64 LOOM query tokens provides the optimal balance between expressiveness and efficiency for persistent global query formulation. Persistent global query formulation consistently outperforms layer-local formulation across all query token numbers.
+      </p>
+    </div>
+    
     <div class="columns is-centered">
       <div class="column">
         <div class="content has-text-centered">
           <figure class="image">
-              <img src="static/images/all_metrics_eval_combined.png" alt="Ablation Comparison on Genesis Test Dataset" style="border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+            <img src="static/images/query_number.png" alt="Number of LOOM Query Tokens" style="border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
           </figure>
           <p class="has-text-grey" style="margin-top: 1rem;">
-              <strong>Ablation comparison on Genesis test dataset:</strong> Performance evaluation of MIRAGE and its ablation variants 
-              (w/o DR, w/o MIRROR) across multiple metrics in the Genesis environment. The results demonstrate the contribution of 
-              domain randomization and MIRROR to the overall performance, with MIRAGE achieving superior results across trajectory 
-              tracking, disturbance recovery, terrain robustness, and sim-to-sim transfer scenarios.
-            </p>
-          </div>
+            Comparison of different numbers of LOOM query tokens on LIBERO-Long. Persistent global query formulation consistently outperforms layer-local formulation across all LOOM query token numbers.
+          </p>
         </div>
       </div>
+    </div>
+    
+    <!-- Layer Selection Rationale -->
+    <div style="margin-top: 3rem;">
+      <h3 class="title is-4 has-text-centered" style="margin-bottom: 2rem;">
+        <span class="gradient-text">Layer Selection Rationale</span>
+      </h3>
+      <div class="content has-text-justified" style="margin-top: 2rem;">
+        <div class="box" style="background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+          <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 1rem;">
+            Our layer-wise performance analysis reveals important insights about feature selection:
+          </p>
+          <ul style="margin-left: 1.5rem; line-height: 1.8;">
+            <li><strong>Middle-layer Raw features (layer 13):</strong> Better balance low-level visual detail and high-level semantics for action generation, achieving 88.3% performance.</li>
+            <li><strong>Deep-layer LOOM Query features (layer 24):</strong> Trained from scratch, aggregate richer multimodal details that more directly support action prediction, achieving 91.0% performance.</li>
+            <li><strong>All-layer features:</strong> Using all-layer features not only yields better performance (97.5% for persistent global LOOM query) but also avoids manual layer selection, making the design more universal.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
       </div>
     </div>
   </section>
 <!-- End Ablation Studies -->
 
-<!-- Policy Structure and Generalization Comparison -->
-<section class="section is-light">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Policy Structure and Generalization Comparison</h2>
-    
-    <div class="content has-text-justified" style="margin-top: 2rem;">
-      <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 2rem;">
-        We compare MIRAGE with existing methods across key dimensions of policy structure and generalization capabilities. 
-        Our method uniquely combines a <strong>unified expert policy</strong> with <strong>masked generalization</strong>, 
-        enabling training with domain randomization and zero-shot transfer to unseen domains. MIRAGE integrates 
-        <strong>domain-aware adaptation</strong> through MIRROR's historical memory, allowing the 
-        policy to sense domain-specific dynamics and switch to optimal strategies without explicit domain labels. This 
-        comprehensive approach distinguishes MIRAGE from prior work, which typically excels in only a subset of these capabilities.
-      </p>
-    </div>
-    
-    <div class="box" style="background: var(--background-secondary);">
-      <div class="table-container" style="overflow-x: auto;">
-        <table class="table is-fullwidth is-striped" style="font-size: 0.9rem;">
-          <thead>
-            <tr>
-              <th>Method</th>
-              <th>Unified<br>Expert Policy</th>
-              <th>Masked<br>Generalization</th>
-              <th>Training<br>with DR</th>
-              <th>Zero-shot<br>Transfer</th>
-              <th>Domain<br>Awareness</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style="background: var(--gradient-primary-medium); font-weight: bold;">
-              <td><strong class="gradient-text">MIRAGE (Ours)</strong></td>
-              <td><strong>✓</strong></td>
-              <td><strong>✓</strong></td>
-              <td><strong>✓</strong></td>
-              <td><strong>✓</strong></td>
-              <td><strong>✓</strong></td>
-            </tr>
-            <tr>
-              <td><strong>BumbleBee (BB)</strong></td>
-              <td>×</td>
-              <td>×</td>
-              <td>∼</td>
-              <td>×</td>
-              <td>×</td>
-            </tr>
-            <tr>
-              <td><strong>HOVER</strong></td>
-              <td>×</td>
-              <td>✓</td>
-              <td>∼</td>
-              <td>✓</td>
-              <td>∼</td>
-            </tr>
-            <tr>
-              <td><strong>MaskedMimic</strong></td>
-              <td>✓</td>
-              <td>✓</td>
-              <td>×</td>
-              <td>×</td>
-              <td>×</td>
-            </tr>
-            <tr>
-              <td><strong>ASAP</strong></td>
-              <td>×</td>
-              <td>×</td>
-              <td>∼</td>
-              <td>×</td>
-              <td>∼</td>
-            </tr>
-            <tr>
-              <td><strong>PHC</strong></td>
-              <td>×</td>
-              <td>×</td>
-              <td>×</td>
-              <td>×</td>
-              <td>×</td>
-            </tr>
-            <tr>
-              <td><strong>PULSE</strong></td>
-              <td>×</td>
-              <td>×</td>
-              <td>×</td>
-              <td>×</td>
-              <td>×</td>
-            </tr>
-            <tr>
-              <td><strong>ExBody2</strong></td>
-              <td>×</td>
-              <td>×</td>
-              <td>∼</td>
-              <td>✓</td>
-              <td>∼</td>
-            </tr>
-            <tr>
-              <td><strong>OmniH2O</strong></td>
-              <td>✓</td>
-              <td>×</td>
-              <td>∼</td>
-              <td>✓</td>
-              <td>∼</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="has-text-centered" style="margin-top: 1rem; font-size: 0.85rem; color: #666;">
-        <strong>Notation:</strong> ✓ explicitly supported; × not supported; ∼ partially supported / indirectly enabled.
-      </p>
-    </div>
-  </div>
-</section>
 
-<!-- Live Demonstrations -->
-<section class="section">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered"><span class="gradient-text">MIRAGE</span> Live Demonstrations</h2>
-    
-    <div class="columns is-multiline" style="margin-top: 2rem;">
-      <div class="column is-6">
-        <div class="box" style="height: 100%;">
-          <h3 class="title is-5 has-text-centered" style="margin-bottom: 1rem;">
-            <span class="gradient-text">Robust Recovery</span>
-          </h3>
-          <video controls style="width: 100%; border-radius: 8px;">
-            <source src="static/videos/g1_random_push.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-          <p class="has-text-grey" style="margin-top: 1rem;">
-            <strong>Random Perturbation Recovery:</strong> MIRAGE demonstrates robust automatic recovery 
-            under random external perturbations, showcasing superior stability and adaptability.
-          </p>
-        </div>
-      </div>
-      
-      <div class="column is-6">
-        <div class="box" style="height: 100%;">
-          <h3 class="title is-5 has-text-centered" style="margin-bottom: 1rem;">
-            <span class="gradient-text">Expert Distillation</span>
-          </h3>
-          <video controls style="width: 100%; border-radius: 8px;">
-            <source src="static/videos/masked_mimic_g1_no_vae.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-          <p class="has-text-grey" style="margin-top: 1rem;">
-            <strong>Teacher-Student Distillation:</strong> Online distillation from expert teacher model 
-            to student model with sparse inputs, demonstrating efficient knowledge transfer.
-          </p>
-        </div>
-      </div>
-      
-      <div class="column is-6">
-        <div class="box" style="height: 100%; background: linear-gradient(to bottom right, var(--background-secondary), #e9ecef); border: 2px dashed var(--primary-color);">
-          <h3 class="title is-5 has-text-centered" style="margin-bottom: 1rem;">
-            <span class="gradient-text">RISE</span> <span style="font-size: 0.8rem; color: var(--primary-color);">🔮 Future Work</span>
-          </h3>
-          <div style="display: flex; align-items: center; justify-content: center; min-height: 300px; background: white; border-radius: 8px; padding: 2rem;">
-            <div style="text-align: center;">
-              <i class="fas fa-lightbulb" style="font-size: 4rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
-              <p style="font-size: 1.2rem; color: var(--primary-color); font-weight: bold;">Conceptual Design</p>
-            </div>
-          </div>
-          <p class="has-text-grey" style="margin-top: 1rem;">
-            <strong>Recovery via Inferred State Endpoints:</strong> Inspired by insights from the MaskedMimic 
-            codebase, we hypothesize a future capability where the student model receives future target states 
-            (sparse keyframes + temporal offset) as input during distillation. We conjecture this will enable 
-            the policy to <em>infer optimal actions</em> that maximize the probability of reaching target states 
-            under physical constraints, achieving higher-dimensional recovery mechanisms such as autonomous 
-            fall-and-get-up behaviors.
-          </p>
-        </div>
-      </div>
-      
-      <div class="column is-6">
-        <div class="box" style="height: 100%; background: #fff9e6; border-left: 4px solid #ffc107;">
-          <h4 class="title is-6" style="color: #f57c00; margin-bottom: 1rem;">
-            <i class="fas fa-rocket"></i> RISE: Vision for Advanced Recovery
-          </h4>
-          <p style="font-size: 1rem; line-height: 1.7;">
-            <strong>Core Hypothesis:</strong> The expert model has learned extensive recovery behaviors 
-            (e.g., fall-and-get-up) from the training dataset. During online distillation, by modifying 
-            the input to include future target states (instead of current states), the student model may 
-            develop an emergent ability to reason about action sequences that lead to desired outcomes. 
-            This input modification transforms the distillation process from "imitate current actions" 
-            to "infer actions toward future goals," potentially enabling:
-          </p>
-          <ul style="margin-top: 0.8rem; margin-left: 1.5rem; font-size: 0.95rem; line-height: 1.6;">
-            <li><strong>Inverse dynamics reasoning:</strong> Computing "what actions now" lead to "target state later"</li>
-            <li><strong>Physics-aware planning:</strong> Respecting physical constraints in action inference</li>
-            <li><strong>Complex recovery behaviors:</strong> Multi-step recovery like fall detection → reorientation → stand-up</li>
-          </ul>
-          <p style="margin-top: 1rem; font-size: 0.9rem; font-style: italic; color: #666;">
-            This represents a promising direction for endowing embodied agents with higher-level recovery intelligence.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 <!-- End Live Demonstrations -->
 
-<!-- Evaluation Framework -->
+
+<!-- Bridge Paradigms Comparison -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Bridge Paradigms Comparison</h2>
+    <div class="content" style="margin-top: 2rem;">
+      <div class="box" style="background: linear-gradient(135deg, rgba(245, 240, 247, 0.5) 0%, rgba(255, 245, 247, 0.5) 50%, rgba(245, 255, 245, 0.5) 100%); padding: 2rem; border-left: 5px solid #9BAEDB; border-radius: 8px;">
+        <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 2rem;">
+          Representative design choices for bridging vision-language to action in VLA architectures, categorized by feature type (Raw features vs Additional Query), which layer features are used (Last, Intermediate, or All layers), and query formulation style (Single-layer, All-layer, Layer-local, or Persistent global).
+        </p>
+        
+        <div class="table-container" style="overflow-x: auto;">
+          <table class="table is-fullwidth is-striped" style="font-size: 0.9rem;">
+            <thead>
+              <tr>
+                <th>Layer</th>
+                <th>Raw</th>
+                <th>LOOM Query</th>
+                <th>Style</th>
+                <th>Method</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td rowspan="2">Last</td>
+                <td>✓</td>
+                <td>×</td>
+                <td>Single-layer</td>
+                <td>RoboVLMs</td>
+              </tr>
+              <tr>
+                <td>×</td>
+                <td>✓</td>
+                <td>Single-layer</td>
+                <td>OpenVLA-OFT</td>
+              </tr>
+              <tr>
+                <td>Intermediate</td>
+                <td>✓</td>
+                <td>×</td>
+                <td>Single-layer</td>
+                <td>GR00T N1</td>
+              </tr>
+              <tr>
+                <td rowspan="4">All</td>
+                <td>✓</td>
+                <td>×</td>
+                <td>All-layer</td>
+                <td>π₀</td>
+              </tr>
+              <tr>
+                <td>×</td>
+                <td>✓</td>
+                <td>Layer-local</td>
+                <td>N/A</td>
+              </tr>
+              <tr>
+                <td>✓</td>
+                <td>✓</td>
+                <td>Layer-local</td>
+                <td>VLA-Adapter-Pro</td>
+              </tr>
+              <tr style="background: var(--gradient-primary-medium); font-weight: bold;">
+                <td>✓</td>
+                <td>✓</td>
+                <td><strong class="gradient-text">Persistent global</strong></td>
+                <td><strong class="gradient-text">LOOM (Ours)</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-top: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+          <h4 class="title is-5" style="margin-bottom: 1rem;">
+            <span class="gradient-text">Evolution of Bridging Paradigms</span>
+          </h4>
+          
+          <h5 class="title is-6" style="margin-top: 1.5rem; margin-bottom: 0.8rem;">Raw Features Paradigm</h5>
+          <p style="margin-bottom: 1rem;">
+            Early VLA methods directly use raw features extracted from frozen VLMs as inputs to policy networks. This approach is simple and computationally efficient, but raw features are optimized for vision-language understanding rather than action generation, creating a modality gap between perception and action.
+          </p>
+          
+          <h5 class="title is-6" style="margin-top: 1.5rem; margin-bottom: 0.8rem;">Additional Query Paradigm</h5>
+          <p style="margin-bottom: 1rem;">
+            Recent methods introduce learnable query tokens (additional queries) that can incorporate multimodal information more effectively. These query tokens are processed through cross-attention with VLM features, enabling them to selectively aggregate relevant information for action generation. However, most existing methods use layer-local formulation where each policy layer processes query tokens independently.
+          </p>
+          
+          <h5 class="title is-6" style="margin-top: 1.5rem; margin-bottom: 0.8rem;">
+            <span class="gradient-text">Persistent Global Paradigm (LOOM)</span>
+          </h5>
+          <p>
+            LOOM proposes a persistent global LOOM query paradigm that maintains task intent across all policy layers. Unlike layer-local formulations where query tokens are processed independently at each layer, persistent global formulation shares a single global query across all layers, ensuring consistent task intent throughout action generation. This paradigm shift fundamentally changes how LOOM queries function in VLA architectures, providing a stronger inductive bias for sustaining instruction-following behavior over extended horizons.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Simulation Examples -->
 <section class="section is-light">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Evaluation Framework</h2>
-    <div class="columns is-centered">
-      <div class="column">
-        <div class="content has-text-centered">
-          <figure class="image">
-            <img src="static/images/mirage_eval_process.jpg" alt="MIRAGE Evaluation Process">
-          </figure>
-          <p class="has-text-grey" style="margin-top: 1rem;">
-            Comprehensive evaluation across <strong>trajectory tracking</strong>, <strong>push recovery</strong>, 
-            <strong>fall recovery</strong>, and <strong>sim-to-sim transfer</strong> scenarios.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Representative Motion Demonstrations -->
-<section class="section">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Representative Motion Demonstrations</h2>
-    <div class="content has-text-centered" style="margin-bottom: 2rem;">
-      <p class="is-size-5">
-        MIRAGE performance across six representative motions under <strong>zero-shot domain transfer</strong> to the 
-        <strong>unseen Genesis environment</strong> (unseen domain). All videos demonstrate robust execution 
-        without target-domain fine-tuning.
+    <h2 class="title is-3 has-text-centered">Simulation Examples</h2>
+    <div class="content has-text-centered" style="margin-top: 2rem;">
+      <p class="is-size-5" style="margin-bottom: 2rem;">
+        Demonstration of LOOM's performance on long-horizon manipulation tasks across different scenarios.
       </p>
-    </div>
-    
-    <div class="columns is-multiline">
-      <!-- Row 1 -->
-      <div class="column is-4">
-        <div class="box" style="height: 100%;">
-          <h3 class="title is-5 has-text-centered" style="margin-bottom: 1rem;">Punch</h3>
-          <video controls style="width: 100%; border-radius: 8px;">
-            <source src="static/videos/eval/1_punch/mirage/tmp_video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      </div>
-      
-      <div class="column is-4">
-        <div class="box" style="height: 100%;">
-          <h3 class="title is-5 has-text-centered" style="margin-bottom: 1rem;">Get Up</h3>
-          <video controls style="width: 100%; border-radius: 8px;">
-            <source src="static/videos/eval/2_getup/mirage/tmp_video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      </div>
-      
-      <div class="column is-4">
-        <div class="box" style="height: 100%;">
-          <h3 class="title is-5 has-text-centered" style="margin-bottom: 1rem;">High Kick</h3>
-          <video controls style="width: 100%; border-radius: 8px;">
-            <source src="static/videos/eval/3_high_kick/mirage/tmp_video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-      </div>
-    </div>
-    
-      <!-- Row 2 -->
-      <div class="column is-4">
-        <div class="box" style="height: 100%;">
-          <h3 class="title is-5 has-text-centered" style="margin-bottom: 1rem;">Common Walk</h3>
-          <video controls style="width: 100%; border-radius: 8px;">
-            <source src="static/videos/eval/4_common_walk/mirage/tmp_video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-    </div>
-  </div>
-      
-      <div class="column is-4">
-        <div class="box" style="height: 100%;">
-          <h3 class="title is-5 has-text-centered" style="margin-bottom: 1rem;">Side Walk</h3>
-          <video controls style="width: 100%; border-radius: 8px;">
-            <source src="static/videos/eval/5_side_walk/mirage/tmp_video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      </div>
-      
-      <div class="column is-4">
-        <div class="box" style="height: 100%;">
-          <h3 class="title is-5 has-text-centered" style="margin-bottom: 1rem;">Martial</h3>
-          <video controls style="width: 100%; border-radius: 8px;">
-            <source src="static/videos/eval/6_martial/mirage/tmp_video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
+      <div class="columns is-centered">
+        <div class="column">
+          <figure class="image">
+            <img src="static/images/SIMULATION_EXAMPLES.png" alt="LOOM Simulation Examples" style="border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+          </figure>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Terrain Diversity -->
-<section class="section">
+<!-- Discussion and Limitations -->
+<section class="section is-light">
   <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Terrain Diversity</h2>
-    <div class="columns is-centered">
-      <div class="column">
-        <div class="content has-text-centered">
-          <figure class="image">
-            <img src="static/images/terrain.png" alt="Terrain Diversity">
-          </figure>
-          <p class="has-text-grey" style="margin-top: 1rem;">
-            <span class="gradient-text">MIRAGE</span> is evaluated across diverse terrain types, 
-            demonstrating robust performance in varied environmental conditions.
+    <h2 class="title is-3 has-text-centered">Discussion</h2>
+    <div class="content" style="margin-top: 2rem;">
+      <div class="box" style="background: linear-gradient(135deg, rgba(245, 240, 247, 0.5) 0%, rgba(255, 245, 247, 0.5) 50%, rgba(245, 255, 245, 0.5) 100%); padding: 2rem; border-left: 5px solid #9BAEDB; border-radius: 8px;">
+        
+        <h3 class="title is-5" style="margin-bottom: 1.5rem;">
+          <span class="gradient-text">Paradigm Shift from Layer-Local to Persistent Global</span>
+        </h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.5rem;">
+          Our work reveals a fundamental limitation in the layer-local query paradigm: it implicitly bottlenecks constraint propagation in long-horizon tasks. The persistent global LOOM query paradigm shifts how LOOM queries function in VLA architectures, maintaining persistent task intent across all policy layers.
+        </p>
+        
+        <h3 class="title is-5" style="margin-top: 2rem; margin-bottom: 1.5rem;">
+          <span class="gradient-text">Empirical Evidence</span>
+        </h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.5rem;">
+          Our experiments demonstrate that persistent global LOOM query formulation outperforms all layer-local formulations. The improvement over the strongest layer-local baseline (VLA-Adapter-Pro) is <strong>1.1%</strong> on LIBERO-Long, and this improvement is particularly notable in long-horizon tasks, confirming that the paradigm shift matters primarily in long-horizon scenarios.
+        </p>
+        
+        <h3 class="title is-5" style="margin-top: 2rem; margin-bottom: 1.5rem;">
+          <span class="gradient-text">Why Persistent Global Paradigm Matters</span>
+        </h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.5rem;">
+          The persistent global LOOM query paradigm matters primarily in long-horizon tasks, where small representation gaps can compound into failure across multi-stage execution. Unlike layer-local formulations where constraint propagation is implicit and may degrade, persistent global formulation explicitly maintains task intent across all layers through a shared global query, providing stronger inductive bias for long-horizon instruction following.
+        </p>
+        
+        <h3 class="title is-5" style="margin-top: 2rem; margin-bottom: 1.5rem;">
+          <span class="gradient-text">Computational Efficiency</span>
+        </h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.5rem;">
+          LOOM maintains high computational efficiency despite the paradigm shift. The persistent global query adds only <strong>2.1M parameters</strong>, and inference throughput remains high at <strong>215.8 Hz</strong> (compared to VLA-Adapter-Pro's 219.2 Hz), demonstrating minimal computational overhead while maintaining task intent throughout action generation.
+        </p>
+        
+        <h3 class="title is-5" style="margin-top: 2rem; margin-bottom: 1.5rem;">
+          <span class="gradient-text">Architectural Advantages</span>
+        </h3>
+        <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.5rem;">
+          The performance gains of LOOM arise from architectural bias rather than additional losses, labels, or task-specific engineering. The method is compatible with existing VLA backbones and training pipelines, requiring only minimal modifications (adding a persistent global LOOM query) while maintaining high efficiency.
+        </p>
+        
+        <h3 class="title is-5" style="margin-top: 2rem; margin-bottom: 1.5rem;">
+          <span class="gradient-text">Limitations</span>
+        </h3>
+        <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-top: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+          <p style="font-size: 1.05rem; line-height: 1.8; margin-bottom: 1rem;">
+            In this work, we focus mainly on imitation learning with tabletop manipulation tasks. Several limitations should be acknowledged:
           </p>
+          <ul style="margin-left: 1.5rem; line-height: 1.8;">
+            <li><strong>Short-horizon tasks:</strong> May not benefit significantly from persistent task intent maintenance, and training convergence is slower during initial training stages.</li>
+            <li><strong>Empirical evidence:</strong> Our evidence for constraint propagation improvement is primarily empirical, and more direct evidence would require measuring constraint propagation across layers.</li>
+            <li><strong>Evaluation scope:</strong> Our evaluation focuses on tabletop manipulation tasks, and the effectiveness in other domains remains to be explored.</li>
+            <li><strong>Computational overhead:</strong> The design introduces slightly higher computational overhead (2.1M parameters, throughput from 219.2 Hz to 215.8 Hz), though this overhead is minimal.</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -1228,31 +1450,27 @@
 </section>
 
 <!--BibTex citation -->
-  <section class="section" id="BibTeX">
-    <div class="container is-max-desktop content">
-        <h2 class="title">BibTeX</h2>
-    <pre><code>@misc{wang2026mirage,
-  title={MIRAGE: Robust Humanoid Control under Dynamics Mismatch},
-  author={Wang, Puyue and Hu, Jiawei and Jia, Hong},
-  year={2026},
-  organization={University of Auckland},
-  url={https://github.com/hong-labs/Mirage}
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">BibTeX</h2>
+    <pre style="background: #f5f5f5; padding: 1rem; border-radius: 4px; overflow-x: auto; margin: 0;"><code style="background: transparent; color: #333; font-size: 0.9rem;">@article{loom2025,
+  title={LOOM: A Long-horizon-orientated Fusion Paradigm for Vision-Language-Action Model},
+  author={[Authors]},
+  journal={[Conference/Journal]},
+  year={2025},
+  url={https://tonywang-0517.github.io/loom.github.io/}
 }</code></pre>
-    </div>
+  </div>
 </section>
 <!--End BibTex citation -->
 
-  <footer class="footer">
+<footer class="footer" style="background: #fafafa; border-top: 1px solid #e0e0e0; padding: 2rem 1.5rem; margin-top: 3rem;">
   <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-          <p>
-            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
-            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
-        </div>
-      </div>
+    <div class="content has-text-centered" style="color: #666; font-size: 0.9rem;">
+      <p style="margin: 0;">
+        This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" style="color: #666; text-decoration: underline;">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank" style="color: #666; text-decoration: underline;">Nerfies</a> project page.
+        You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank" style="color: #666; text-decoration: underline;">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+      </p>
     </div>
   </div>
 </footer>
